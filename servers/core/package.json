@@ -1,0 +1,30 @@
+{
+  "name": "nuxt3-starter",
+  "description": "A better nuxt3 starter template",
+  "private": false,
+  "scripts": {
+    "dev": "nuxt dev --port 6636",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "serve": "esno .output/server/index.mjs",
+    "p:ish": "pnpm install --shamefully-hoist",
+    "p:up": "pnpm up"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.2.218",
+    "@nuxt/devtools": "latest",
+    "@pinia/nuxt": "^0.5.1",
+    "@unocss/nuxt": "^0.61.0",
+    "@unocss/reset": "^0.61.0",
+    "@vueuse/nuxt": "^10.10.1",
+    "nuxt": "^3.12.1",
+    "unplugin-icons": "^0.19.0",
+    "unplugin-vue-components": "^0.27.0"
+  },
+  "dependencies": {
+    "pinia": "^2.1.7",
+    "vue-i18n": "^9.13.1"
+  }
+}
