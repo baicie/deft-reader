@@ -1,27 +1,16 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from './resource/app/app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import path, { join } from 'path';
+import { setupStaticFiles } from './static-files.config';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  console.log('path', path);
+  const configService = app.get(ConfigService);
+  const dbPort = configService.get<number>('DATABASE_PORT') || 3000;
 
-  // 提供静态文件
-  app.useStaticAssets(join(__dirname, '../static'), {
-    index: false, // 禁用默认目录索引
-    redirect: false, // 禁用从 URL 末尾 "/" 重定向到默认文件名
-  });
+  setupStaticFiles(app);
 
-  // 配置 SPA 路由处理：如果不是 /api 开头的请求，返回 index.html
-  app.use((req, res, next) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(join(__dirname, '../static/index.html'));
-    } else {
-      next();
-    }
-  });
-
-  await app.listen(3000);
+  await app.listen(dbPort);
 }
 bootstrap();

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { typeOrmConfig } from './config/typeorm.config';
-import { UsersModule } from './users/users.module';
+import { typeOrmConfig } from '../../config/typeorm.config';
+import { UsersModule } from '../users/users.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 

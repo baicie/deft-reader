@@ -9,6 +9,6 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: "../core/public",
+    outDir: "../core/static",
   },
 });

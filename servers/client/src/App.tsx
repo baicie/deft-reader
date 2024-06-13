@@ -54,6 +54,8 @@ function App() {
 
       <DatePicker />
 
+      <DatePicker />
+
       <Radio.Group value={i18n.language} onChange={changeLocale}>
         <Radio.Button key="en" value={"en"}>
           English
