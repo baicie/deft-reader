@@ -45,7 +45,6 @@ function App() {
   }, [i18n]);
 
   const changeLocale = useCallback((e: RadioChangeEvent) => {
-    console.log(e.target.value);
     i18n.changeLanguage(e.target.value);
   }, []);
 
@@ -55,7 +54,7 @@ function App() {
 
       <DatePicker />
 
-      <Radio.Group value={antdLocale} onChange={changeLocale}>
+      <Radio.Group value={i18n.language} onChange={changeLocale}>
         <Radio.Button key="en" value={"en"}>
           English
         </Radio.Button>
