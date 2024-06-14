@@ -15,6 +15,6 @@ export async function bootstrap(envFile: string = '.env') {
   const dbPort = configService.get<number>('DATABASE_PORT') || 3000
   // has web static
   setupStaticFiles(app)
-
+  app.setGlobalPrefix('api')
   await app.listen(dbPort)
 }
