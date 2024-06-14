@@ -286,9 +286,6 @@ importers:
       sql.js:
         specifier: ^1.10.3
         version: 1.10.3
-      sqlite3:
-        specifier: ^5.1.7
-        version: 5.1.7
       typeorm:
         specifier: ^0.3.20
         version: 0.3.20(sql.js@1.10.3)(sqlite3@5.1.7)(ts-node@10.9.2(@swc/core@1.5.29)(@types/node@20.14.2)(typescript@5.4.5))
@@ -11491,6 +11488,7 @@ snapshots:
   bindings@1.5.0:
     dependencies:
       file-uri-to-path: 1.0.0
+    optional: true
 
   bl@4.1.0:
     dependencies:
@@ -11785,7 +11783,8 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  chownr@1.1.4: {}
+  chownr@1.1.4:
+    optional: true
 
   chownr@2.0.0: {}
 
@@ -12265,6 +12264,7 @@ snapshots:
   end-of-stream@1.4.4:
     dependencies:
       once: 1.4.0
+    optional: true
 
   enhanced-resolve@5.17.0:
     dependencies:
@@ -12828,7 +12828,8 @@ snapshots:
 
   exit@0.1.2: {}
 
-  expand-template@2.0.3: {}
+  expand-template@2.0.3:
+    optional: true
 
   expect@29.7.0:
     dependencies:
@@ -12939,7 +12940,8 @@ snapshots:
     dependencies:
       flat-cache: 4.0.1
 
-  file-uri-to-path@1.0.0: {}
+  file-uri-to-path@1.0.0:
+    optional: true
 
   fill-range@7.1.1:
     dependencies:
@@ -13054,7 +13056,8 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 2.3.8
 
-  fs-constants@1.0.0: {}
+  fs-constants@1.0.0:
+    optional: true
 
   fs-extra@10.1.0:
     dependencies:
@@ -13158,7 +13161,8 @@ snapshots:
       through2: 2.0.5
       traverse: 0.6.9
 
-  github-from-package@0.0.0: {}
+  github-from-package@0.0.0:
+    optional: true
 
   glob-parent@5.1.2:
     dependencies:
@@ -14880,7 +14884,8 @@ snapshots:
 
   mj-context-menu@0.6.1: {}
 
-  mkdirp-classic@0.5.3: {}
+  mkdirp-classic@0.5.3:
+    optional: true
 
   mkdirp@0.5.6:
     dependencies:
@@ -14945,7 +14950,8 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  napi-build-utils@1.0.2: {}
+  napi-build-utils@1.0.2:
+    optional: true
 
   natural-compare-lite@1.4.0: {}
 
@@ -14968,13 +14974,15 @@ snapshots:
   node-abi@3.64.0:
     dependencies:
       semver: 7.6.2
+    optional: true
 
   node-abort-controller@3.1.1: {}
 
   node-addon-api@4.3.0:
     optional: true
 
-  node-addon-api@7.1.0: {}
+  node-addon-api@7.1.0:
+    optional: true
 
   node-emoji@1.11.0:
     dependencies:
@@ -15536,6 +15544,7 @@ snapshots:
       simple-get: 4.0.1
       tar-fs: 2.1.1
       tunnel-agent: 0.6.0
+    optional: true
 
   prelude-ls@1.2.1: {}
 
@@ -15599,6 +15608,7 @@ snapshots:
     dependencies:
       end-of-stream: 1.4.4
       once: 1.4.0
+    optional: true
 
   punycode@2.3.1: {}
 
@@ -16451,13 +16461,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  simple-concat@1.0.1: {}
+  simple-concat@1.0.1:
+    optional: true
 
   simple-get@4.0.1:
     dependencies:
       decompress-response: 6.0.0
       once: 1.4.0
       simple-concat: 1.0.1
+    optional: true
 
   simple-update-notifier@2.0.0:
     dependencies:
@@ -16581,6 +16593,7 @@ snapshots:
     transitivePeerDependencies:
       - bluebird
       - supports-color
+    optional: true
 
   ssri@10.0.6:
     dependencies:
@@ -16773,6 +16786,7 @@ snapshots:
       mkdirp-classic: 0.5.3
       pump: 3.0.0
       tar-stream: 2.2.0
+    optional: true
 
   tar-stream@2.2.0:
     dependencies:
@@ -16781,6 +16795,7 @@ snapshots:
       fs-constants: 1.0.0
       inherits: 2.0.4
       readable-stream: 3.6.2
+    optional: true
 
   tar@6.2.1:
     dependencies:
@@ -17011,6 +17026,7 @@ snapshots:
   tunnel-agent@0.6.0:
     dependencies:
       safe-buffer: 5.2.1
+    optional: true
 
   tunnel@0.0.6: {}
 
