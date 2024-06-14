@@ -24,7 +24,9 @@ jobs:
           version: 9.3.0
 
       - name: Get version
-        run: echo "TAG_VERSION=${0.0.0-beta.1}" >> $GITHUB_ENV
+        run: |
+          VERSION="0.0.0-beta.1"
+          echo "TAG_VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Get git head
         run: echo "GIT_HEAD=${GITHUB_SHA}" >> $GITHUB_ENV
