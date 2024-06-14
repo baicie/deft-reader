@@ -40,7 +40,7 @@ jobs:
           GIT_HEAD: ${{env.GIT_HEAD}}
           REGISTRY: https://registry.npmjs.com/
           NODE_OPTIONS: --max-old-space-size=4096
-      
+
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1
         with:
@@ -49,7 +49,7 @@ jobs:
           packagePath: "packages/extension"
           path: "packages/extension/b-reader-${{env.TAG_VERSION}}.vsix"
           registryUrl: https://marketplace.visualstudio.com
-    
+
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:
