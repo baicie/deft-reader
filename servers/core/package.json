@@ -9,6 +9,7 @@
   "types": "bootstrap.d.ts",
   "scripts": {
     "build-dev": "nest build --watch",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "dev": "nest start --watch",
     "start:dev": "nest start --watch",
