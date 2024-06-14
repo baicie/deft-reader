@@ -36,7 +36,8 @@ jobs:
         run: npm who am i
 
       - name: Build&publish
-        run: pnpm i --frozen-lockfile --ignore-scripts
+        run: |
+          pnpm i --frozen-lockfile --ignore-scripts
           pnpm update-version
           turbo run test --filter=servers/*
           pnpm --filter=servers/* publish --access public
