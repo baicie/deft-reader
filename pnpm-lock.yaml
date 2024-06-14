@@ -183,9 +183,15 @@ importers:
 
   servers/client:
     dependencies:
+      '@ant-design/icons':
+        specifier: ^5.3.7
+        version: 5.3.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       antd:
         specifier: ^5.18.1
         version: 5.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       i18next-browser-languagedetector:
         specifier: ^8.0.0
         version: 8.0.0

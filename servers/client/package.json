@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "antd": "^5.18.1",
+    "dayjs": "^1.11.11",
     "i18next-browser-languagedetector": "^8.0.0",
     "mobx": "^6.12.4",
     "mobx-react": "^9.1.1",
