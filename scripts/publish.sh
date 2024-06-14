@@ -8,6 +8,4 @@ pnpm update-version
 
 pnpm build
 
-pnpm publish-script
-
-echo "✅ Publish completed"
+pnpm publish-script 

@@ -1,5 +1,4 @@
 {
-  "include": ["packages"],
   "compilerOptions": {
     "outDir": "dist",
     "target": "ESNext",

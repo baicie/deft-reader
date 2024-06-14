@@ -1,12 +1,14 @@
 {
-  "name": "core",
+  "name": "@deft-reader/api",
   "version": "0.0.1",
   "description": "",
   "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "main": "dist/bootstrap.js",
+  "module": "dist/bootstrap.js",
+  "types": "bootstrap.d.ts",
   "scripts": {
-    "build": "nest build",
+    "build-dev": "nest build --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "dev": "nest start --watch",
     "start:dev": "nest start --watch",
@@ -27,6 +29,7 @@
     "@nestjs/platform-express": "^10.3.9",
     "@nestjs/serve-static": "^4.0.2",
     "@nestjs/typeorm": "^10.0.2",
+    "dotenv": "^16.4.5",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "sqlite3": "^5.1.7",
@@ -71,5 +74,11 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "files": [
+    "dist",
+    "static",
+    ".env",
+    "bootstrap.d.ts"
+  ]
 }
