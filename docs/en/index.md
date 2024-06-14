@@ -1,12 +1,12 @@
 ---
 layout: home
 
-title: deft-reader
-titleTemplate: 玩呢
+title: Vite
+titleTemplate: Next Generation Frontend Tooling
 
 hero:
-  name: deft-reader
-  text: 玩呢
+  name: Vite
+  text: Next Generation Frontend Tooling
   tagline: Get ready for a development environment that can finally catch up with you.
   image:
     src: /logo-with-shadow.png
