@@ -1,9 +1,9 @@
-import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import { initReactI18next } from "react-i18next";
-import cn from "./cn";
-import en from "./en";
-import fr from "./fr";
+import i18n from 'i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
+import { initReactI18next } from 'react-i18next'
+import cn from './cn'
+import en from './en'
+import fr from './fr'
 
 i18n
   .use(LanguageDetector)
@@ -20,10 +20,10 @@ i18n
         translation: fr,
       },
     },
-    lng: "cn",
+    lng: 'cn',
     interpolation: {
       escapeValue: false,
     },
-  });
+  })
 
-export default i18n;
+export default i18n

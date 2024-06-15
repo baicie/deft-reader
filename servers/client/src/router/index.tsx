@@ -1,9 +1,10 @@
-import { lazy } from "react";
-import { RouteObject, createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Layout from "../layout";
+import { lazy } from 'react'
+import type { RouteObject } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
+import App from '../App'
+import Layout from '../layout'
 
-const Demo = lazy(() => import("../view/demo/demo-container"));
+const Demo = lazy(() => import('../view/demo/demo-container'))
 
 export const routes: RouteObject[] = [
   {
@@ -11,17 +12,17 @@ export const routes: RouteObject[] = [
     errorElement: <div>error</div>,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <App />,
       },
       {
-        path: "/demo",
+        path: '/demo',
         element: <Demo />,
       },
     ],
   },
-];
+]
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes)
 
-export default router;
+export default router

@@ -1,35 +1,37 @@
-import { LogLevel } from "./log-level";
-import { LogTransport } from "./transport";
+import { LogLevel } from './log-level'
+import type { LogTransport } from './transport'
 
 /**
  * Log Service
  */
 export class Logger {
-  constructor(private transports: LogTransport[]) {}
-
-  public addTransport(transport: LogTransport) {
-    this.transports.push(transport);
+  constructor(private transports: LogTransport[]) {
+    this.transports = transports
   }
 
-  public error(msg: string) {
-    this.log(LogLevel.Error, msg);
+  public addTransport(transport: LogTransport): void {
+    this.transports.push(transport)
   }
 
-  public warn(msg: string) {
-    this.log(LogLevel.Warn, msg);
+  public error(msg: string): void {
+    this.log(LogLevel.Error, msg)
   }
 
-  public info(msg: string) {
-    this.log(LogLevel.Info, msg);
+  public warn(msg: string): void {
+    this.log(LogLevel.Warn, msg)
   }
 
-  public debug(msg: string) {
-    this.log(LogLevel.Debug, msg);
+  public info(msg: string): void {
+    this.log(LogLevel.Info, msg)
   }
 
-  public log(level: LogLevel, msg: string) {
+  public debug(msg: string): void {
+    this.log(LogLevel.Debug, msg)
+  }
+
+  public log(level: LogLevel, msg: string): void {
     this.transports.forEach((transport) => {
-      transport.log(level, "app", msg);
-    });
+      transport.log(level, 'app', msg)
+    })
   }
 }

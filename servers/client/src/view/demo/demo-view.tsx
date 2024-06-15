@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
-import styles from "./demo.module.scss";
+import type { ReactElement } from 'react'
+import styles from './demo.module.scss'
 
 interface Props {
-  msg: string;
-  onClick: () => void;
+  msg: string
+  onClick: () => void
 }
 
 const DemoView = ({ msg, onClick }: Props): ReactElement => (
@@ -13,5 +13,5 @@ const DemoView = ({ msg, onClick }: Props): ReactElement => (
       click
     </button>
   </div>
-);
-export default DemoView;
+)
+export default DemoView

@@ -1,23 +1,31 @@
 {
-  "name": "fucking-reader",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "deft-reader",
+  "private": "true",
   "scripts": {
     "cz": "bcz",
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint-fix": "eslint ./packages ./scripts --fix",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "simple-git-hooks",
+    "format": "prettier --write --cache .",
+    "lint": "eslint --cache .",
+    "typecheck": "echo typecheck",
+    "server-dev": "turbo run dev --filter=./servers/*",
+    "server-build": "turbo run build --filter=./servers/*",
+    "build": "run-s server-build",
+    "test-unit": "vitest run",
+    "test-e2e": "vitest run -c vitest.config.e2e.ts",
+    "test-docs": "pnpm run docs-build",
+    "test": "run-s test-unit test-e2e test-docs",
+    "docs": "pnpm --filter=docs run docs",
+    "docs-build": "pnpm --filter=docs run docs-build",
+    "docs-serve": "pnpm --filter=docs run docs-serve",
     "update-version": "tsx scripts/update-version.ts",
     "publish-script": "tsx scripts/publish-script.ts",
     "update": "ncu -uws"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@antfu/eslint-config": "2.21.1",
     "@baicie/commitizen": "^0.1.0",
+    "@eslint/js": "^9.5.0",
     "@pnpm/find-workspace-packages": "^6.0.9",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
@@ -27,6 +35,7 @@
     "@types/lodash": "^4.17.5",
     "@types/mime-types": "^2.1.4",
     "@types/mocha": "^10.0.6",
+    "@types/multer": "^1.4.11",
     "@types/node": "~20.14.2",
     "@types/tough-cookie": "^4.0.5",
     "@types/unzipper": "^0.10.9",
@@ -36,26 +45,64 @@
     "@typescript-eslint/parser": "^7.13.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "chalk": "^5.3.0",
+    "consola": "^3.2.3",
     "cross-env": "^7.0.3",
     "eslint": "^9.4.0",
+    "eslint-plugin-i": "^2.29.1",
+    "eslint-plugin-n": "^17.9.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "eslint-plugin-regexp": "^2.6.0",
     "fast-glob": "^3.3.2",
+    "globals": "^15.4.0",
     "i18next": "^23.11.5",
+    "lint-staged": "^15.2.7",
     "lodash": "^4.17.21",
     "mime-types": "^2.1.35",
     "nodemon": "^3.1.3",
     "npm-check-updates": "^16.14.20",
+    "npm-run-all2": "^6.2.0",
     "oxlint": "^0.4.3",
+    "playwright-chromium": "^1.44.1",
+    "prettier": "^3.3.2",
     "react-i18next": "^14.1.2",
+    "reflect-metadata": "^0.2.2",
     "rollup": "^4.18.0",
     "rollup-plugin-esbuild": "^6.1.1",
     "sass": "^1.77.5",
     "semantic-release-vsce": "^5.7.1",
+    "simple-git-hooks": "^2.11.1",
     "tsup": "^8.1.0",
     "tsx": "^4.15.2",
     "turbo": "^2.0.3",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.0",
+    "unplugin-swc": "^1.4.5",
     "vite": "^5.2.13",
+    "vitest": "^1.6.0",
     "vue": "^3.4.27",
     "vue-tsc": "^2.0.21"
+  },
+  "packageManager": "pnpm@9.3.0",
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged --concurrent false"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ],
+    "servers/*/{src,types}/**/*.ts": [
+      "eslint --cache --fix"
+    ],
+    "servers/**/*.d.ts": [
+      "eslint --cache --fix"
+    ],
+    "servers/**/__tests__/**/*.ts": [
+      "eslint --cache --fix"
+    ]
   }
 }
