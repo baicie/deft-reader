@@ -5,3 +5,7 @@ cache
 database.sqlite
 dist/
 **/dist/
+uploads
+**/uploads
+log
+**/log

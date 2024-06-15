@@ -16,13 +16,13 @@ export default defineConfig({
         chunkFileNames: 'js/[name].[hash].js',
         entryFileNames: 'js/[name].[hash].js',
         manualChunks(id) {
-          // 分包
+          // 处理 pnpm 的依赖路径
           if (id.includes('node_modules')) {
-            return id
-              .toString()
-              .split('node_modules/')[1]
-              .split('/')[0]
-              .toString()
+            const directories = id.toString().split('node_modules/')
+            if (directories.length > 2) {
+              return directories[2].split('/')[0].toString()
+            }
+            return directories[1].split('/')[0].toString()
           }
         },
       },

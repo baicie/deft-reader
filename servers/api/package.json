@@ -18,6 +18,7 @@
     "@nestjs/mapped-types": "^2.0.5",
     "@nestjs/platform-express": "^10.3.9",
     "@nestjs/serve-static": "^4.0.2",
+    "@nestjs/swagger": "^7.3.1",
     "@nestjs/typeorm": "^10.0.2",
     "dotenv": "^16.4.5",
     "multer": "1.4.5-lts.1",
@@ -25,7 +26,10 @@
     "rxjs": "^7.8.1",
     "serve-static": "^1.15.0",
     "sql.js": "^1.10.3",
-    "typeorm": "^0.3.20"
+    "swagger-ui-express": "^5.0.1",
+    "typeorm": "^0.3.20",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.3.2",

@@ -6,6 +6,7 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { typeOrmConfig } from '../../config/typeorm.config'
 import { UsersModule } from '../users/users.module'
 import { UploadModule } from '../upload/upload.module'
+import { CustomLoggerService } from '../../config/logger.service'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
@@ -26,6 +27,7 @@ import { AppService } from './app.service'
     UploadModule
   ],
   controllers: [AppController], // 注册你的控制器
-  providers: [AppService] // 注册你的服务
+  providers: [AppService, CustomLoggerService], // 注册你的服务
+  exports: [CustomLoggerService]
 })
 export class AppModule {}
