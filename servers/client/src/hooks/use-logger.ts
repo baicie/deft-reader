@@ -5,6 +5,6 @@ import { useInjectable } from './use-di'
  * hook: 获得注入的 Logger
  * @returns
  */
-export function useLogger() {
+export function useLogger(): Logger {
   return useInjectable(Logger)
 }

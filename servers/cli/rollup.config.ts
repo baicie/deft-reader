@@ -1,12 +1,12 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'rollup'
-import esbuild from 'rollup-plugin-esbuild'
-import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
-import type { Plugin } from 'rollup'
+import nodeResolve from '@rollup/plugin-node-resolve'
 import MagicString from 'magic-string'
+import type { Plugin } from 'rollup'
+import { defineConfig } from 'rollup'
+import esbuild from 'rollup-plugin-esbuild'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 

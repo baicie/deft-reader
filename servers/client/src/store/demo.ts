@@ -7,7 +7,7 @@ export class Demo {
   public msg = 'Hello'
 
   @action
-  public doSth() {
+  public doSth(): void {
     this.msg = 'Hello World'
   }
 

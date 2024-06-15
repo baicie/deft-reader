@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { LogLevel } from './log-level'
-import { LogTransport } from './transport'
+import type { LogTransport } from './transport'
 
 const LEVEL_TAGS = {
   [LogLevel.Debug]: 'DBG',
@@ -36,7 +36,9 @@ function getFn(level: LogLevel) {
  * 日志打印接口 控制台实现
  */
 export class ConsoleLogTransport implements LogTransport {
-  constructor(public readonly maxLevel: LogLevel) {}
+  constructor(public readonly maxLevel: LogLevel) {
+    this.maxLevel = maxLevel
+  }
 
   log(level: LogLevel, module: string, msg: string): void {
     if (level > this.maxLevel) {

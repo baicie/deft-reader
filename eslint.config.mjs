@@ -1,5 +1,5 @@
 // @ts-check
-import { builtinModules, createRequire } from 'node:module'
+import { builtinModules } from 'node:module'
 import eslint from '@eslint/js'
 import pluginN from 'eslint-plugin-n'
 import * as pluginI from 'eslint-plugin-i'
@@ -7,9 +7,8 @@ import pluginRegExp from 'eslint-plugin-regexp'
 import tsParser from '@typescript-eslint/parser'
 import tseslint from 'typescript-eslint'
 import globals from 'globals'
-
-const require = createRequire(import.meta.url)
-const pkg = require('./package.json')
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tsEslint from '@typescript-eslint/eslint-plugin'
 
 export default tseslint.config(
   {
@@ -28,7 +27,8 @@ export default tseslint.config(
   ...tseslint.configs.stylistic,
   /** @type {any} */ (pluginRegExp.configs['flat/recommended']),
   {
-    name: 'main',
+    name: 'main/node',
+    files: ['servers/cli/**/*.ts', 'servers/api/**/*.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -48,7 +48,6 @@ export default tseslint.config(
       'n/no-exports-assign': 'error',
       'n/no-unpublished-bin': 'error',
       'n/no-unsupported-features/es-builtins': 'error',
-      'n/no-unsupported-features/node-builtins': 'error',
       'n/process-exit-as-throw': 'error',
       'n/hashbang': 'error',
 
@@ -86,11 +85,8 @@ export default tseslint.config(
       ],
 
       '@typescript-eslint/ban-ts-comment': 'error',
-      '@typescript-eslint/ban-types': 'off', // TODO: we should turn this on in a new PR
-      '@typescript-eslint/explicit-module-boundary-types': [
-        'error',
-        { allowArgumentsExplicitlyTypedAsAny: true },
-      ],
+      '@typescript-eslint/ban-types': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': ['off'],
       '@typescript-eslint/no-empty-function': [
         'error',
         { allow: ['arrowFunctions'] },
@@ -100,7 +96,7 @@ export default tseslint.config(
       'no-extra-semi': 'off',
       '@typescript-eslint/no-extra-semi': 'off', // conflicts with prettier
       '@typescript-eslint/no-inferrable-types': 'off',
-      '@typescript-eslint/no-unused-vars': 'off', // maybe we should turn this on in a new PR
+      '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-var-requires': 'off',
       '@typescript-eslint/consistent-type-imports': [
         'error',
@@ -136,6 +132,33 @@ export default tseslint.config(
       'regexp/no-contradiction-with-assertion': 'error',
       // in some cases using explicit letter-casing is more performant than the `i` flag
       'regexp/use-ignore-case': 'off',
+    },
+  },
+
+  {
+    name: 'main/client',
+    files: ['servers/client/**/*.{ts,tsx,js,jsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        sourceType: 'module',
+        ecmaVersion: 2020,
+      },
+      globals: {
+        ...globals.es2021,
+        ...globals.browser,
+      },
+    },
+    extends: [eslint.configs.recommended],
+    plugins: {
+      '@typescript-eslint': tsEslint,
+      'react-refresh': reactRefresh,
+    },
+    rules: {},
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
 

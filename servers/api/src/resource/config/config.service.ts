@@ -1,26 +1,26 @@
 import { Injectable } from '@nestjs/common'
-import { CreateConfigDto } from './dto/create-config.dto'
-import { UpdateConfigDto } from './dto/update-config.dto'
+import type { CreateConfigDto } from './dto/create-config.dto'
+import type { UpdateConfigDto } from './dto/update-config.dto'
 
 @Injectable()
 export class ConfigService {
-  create(createConfigDto: CreateConfigDto) {
+  create(createConfigDto: CreateConfigDto): string {
     return 'This action adds a new config'
   }
 
-  findAll() {
+  findAll(): string {
     return `This action returns all config`
   }
 
-  findOne(id: number) {
+  findOne(id: number): string {
     return `This action returns a #${id} config`
   }
 
-  update(id: number, updateConfigDto: UpdateConfigDto) {
+  update(id: number, updateConfigDto: UpdateConfigDto): string {
     return `This action updates a #${id} config`
   }
 
-  remove(id: number) {
+  remove(id: number): string {
     return `This action removes a #${id} config`
   }
 }

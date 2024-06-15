@@ -3,11 +3,10 @@ import {
   ConfigProvider,
   DatePicker,
   Radio,
-  RadioChangeEvent,
   Upload,
-  UploadProps,
   message,
 } from 'antd'
+import type { UploadProps, RadioChangeEvent } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import enUS from 'antd/lib/locale/en_US'
 import frFR from 'antd/lib/locale/fr_FR'

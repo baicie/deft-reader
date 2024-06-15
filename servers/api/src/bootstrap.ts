@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core'
-import { AppModule } from './resource/app/app.module'
-import { NestExpressApplication } from '@nestjs/platform-express'
-import { setupStaticFiles } from './static-files.config'
-import { ConfigService } from '@nestjs/config'
 import { join, resolve } from 'node:path'
+import { ConfigService } from '@nestjs/config'
+import { NestFactory } from '@nestjs/core'
+import type { NestExpressApplication } from '@nestjs/platform-express'
 import { config } from 'dotenv'
+import { AppModule } from './resource/app/app.module'
+import { setupStaticFiles } from './static-files.config'
 
 export async function bootstrap(envFile: string = '.env') {
   const envFilePath = resolve(__dirname, envFile)

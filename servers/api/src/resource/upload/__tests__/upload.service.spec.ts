@@ -1,4 +1,4 @@
-import type { TestingModule } from '@nestjs/testing';
+import type { TestingModule } from '@nestjs/testing'
 import { Test } from '@nestjs/testing'
 import { beforeEach, describe, expect } from 'vitest'
 import { UploadService } from '../upload.service'

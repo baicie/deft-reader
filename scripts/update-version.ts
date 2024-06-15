@@ -1,12 +1,12 @@
+import path from 'node:path'
 import process from 'node:process'
 import type { Project } from '@pnpm/find-workspace-packages'
 import { findWorkspacePackages } from '@pnpm/find-workspace-packages'
 import chalk from 'chalk'
 import consola from 'consola'
 import { rootPath } from './paths'
-import path from 'node:path'
 
-const getWorkspacePackages = (filterPath: string = '') => {
+const getWorkspacePackages = (filterPath = '') => {
   if (filterPath)
     return findWorkspacePackages(path.resolve(rootPath, filterPath))
   return findWorkspacePackages(rootPath)
@@ -38,8 +38,9 @@ async function main() {
     await project.writeProjectManifest({
       ...project.manifest,
       version,
+      // @ts-expect-error - writeProjectManifest is not typed
       gitHead,
-    } as any)
+    })
   }
 
   try {

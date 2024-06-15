@@ -1,15 +1,15 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
+  Controller,
+  Delete,
+  Get,
   Param,
-  Delete
+  Patch,
+  Post
 } from '@nestjs/common'
-import { ConfigService } from './config.service'
-import { CreateConfigDto } from './dto/create-config.dto'
-import { UpdateConfigDto } from './dto/update-config.dto'
+import type { ConfigService } from './config.service'
+import type { CreateConfigDto } from './dto/create-config.dto'
+import type { UpdateConfigDto } from './dto/update-config.dto'
 
 @Controller('config')
 export class ConfigController {

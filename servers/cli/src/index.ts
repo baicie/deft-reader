@@ -1,9 +1,9 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { bootstrap } from '@deft-reader/api'
 import { cac } from 'cac'
 import { VERSION } from './constants'
-import { bootstrap } from '@deft-reader/api'
-import { fileURLToPath } from 'node:url'
-import path from 'node:path'
-import fs from 'node:fs'
 
 const cli = cac('deft')
 const __dirname = fileURLToPath(new URL('.', import.meta.url))

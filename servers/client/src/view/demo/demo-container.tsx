@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import DemoView from './demo-view'
-import { Demo } from '../../store/demo'
-import { useLogger } from '../../hooks/use-logger'
 import { useInjectable } from '../../hooks/use-di'
+import { useLogger } from '../../hooks/use-logger'
+import { Demo } from '../../store/demo'
+import DemoView from './demo-view'
 
 export default observer(() => {
   const demo = useInjectable(Demo)

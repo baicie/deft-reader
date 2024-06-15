@@ -15,8 +15,9 @@ export default defineConfig({
   },
   publicDir: false,
   plugins: [
+    // @ts-expect-error - swc.vite is not typed
     swc.vite({
       module: { type: 'es6' },
-    }) as any,
+    }),
   ],
 })

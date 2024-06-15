@@ -1,1 +1,1 @@
-export const createServer = async () => {}
+export const createServer = async (): Promise<void> => {}
