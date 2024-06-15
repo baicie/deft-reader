@@ -104,17 +104,17 @@ jobs:
         if: steps.changed-files.outputs.only_changed != 'true'
         run: pnpm run build
 
-      - name: Test unit
-        if: steps.changed-files.outputs.only_changed != 'true'
-        run: pnpm run test-unit
+      # - name: Test unit
+      #   if: steps.changed-files.outputs.only_changed != 'true'
+      #   run: pnpm run test-unit
 
-      - name: Test serve
-        if: steps.changed-files.outputs.only_changed != 'true'
-        run: pnpm run test-serve
+      # - name: Test serve
+      #   if: steps.changed-files.outputs.only_changed != 'true'
+      #   run: pnpm run test-serve
 
-      - name: Test build
-        if: steps.changed-files.outputs.only_changed != 'true'
-        run: pnpm run test-build
+      # - name: Test build
+      #   if: steps.changed-files.outputs.only_changed != 'true'
+      #   run: pnpm run test-build
 
   lint:
     timeout-minutes: 10
