@@ -1,101 +1,101 @@
-import { createRequire } from "node:module";
-import { defineConfig } from "vitepress";
+import { createRequire } from 'node:module'
+import { defineConfig } from 'vitepress'
 
-const require = createRequire(import.meta.url);
-const pkg = require("../../../package.json");
+const require = createRequire(import.meta.url)
+const pkg = require('../../../package.json')
 
 export const en = defineConfig({
-  lang: "en-US",
-  description: "deft-reader",
+  lang: 'en-US',
+  description: 'deft-reader',
 
   themeConfig: {
-    logo: "/logo.svg",
+    logo: '/logo.svg',
 
     nav: [
       {
-        text: "Guide",
-        link: "/zh/guide/what-is-deft-reader",
-        activeMatch: "/zh/guide/",
+        text: 'Guide',
+        link: '/zh/guide/what-is-deft-reader',
+        activeMatch: '/zh/guide/',
       },
       {
         text: pkg.version,
         items: [
           {
-            text: "Changelog",
-            link: "",
+            text: 'Changelog',
+            link: '',
           },
           {
-            text: "Contributing",
-            link: "",
+            text: 'Contributing',
+            link: '',
           },
         ],
       },
     ],
 
     sidebar: {
-      "/en/guide": {
-        base: "/en/guide/",
+      '/en/guide': {
+        base: '/en/guide/',
         items: [
           {
-            text: "Introduction",
+            text: 'Introduction',
             collapsed: false,
             items: [
-              { text: "What is VitePress?", link: "what-is-vitepress" },
-              { text: "Getting Started", link: "getting-started" },
-              { text: "Routing", link: "routing" },
-              { text: "Deploy", link: "deploy" },
+              { text: 'What is VitePress?', link: 'what-is-vitepress' },
+              { text: 'Getting Started', link: 'getting-started' },
+              { text: 'Routing', link: 'routing' },
+              { text: 'Deploy', link: 'deploy' },
             ],
           },
           {
-            text: "Writing",
+            text: 'Writing',
             collapsed: false,
             items: [
-              { text: "Markdown Extensions", link: "markdown" },
-              { text: "Asset Handling", link: "asset-handling" },
-              { text: "Frontmatter", link: "frontmatter" },
-              { text: "Using Vue in Markdown", link: "using-vue" },
-              { text: "Internationalization", link: "i18n" },
+              { text: 'Markdown Extensions', link: 'markdown' },
+              { text: 'Asset Handling', link: 'asset-handling' },
+              { text: 'Frontmatter', link: 'frontmatter' },
+              { text: 'Using Vue in Markdown', link: 'using-vue' },
+              { text: 'Internationalization', link: 'i18n' },
             ],
           },
           {
-            text: "Customization",
+            text: 'Customization',
             collapsed: false,
             items: [
-              { text: "Using a Custom Theme", link: "custom-theme" },
+              { text: 'Using a Custom Theme', link: 'custom-theme' },
               {
-                text: "Extending the Default Theme",
-                link: "extending-default-theme",
+                text: 'Extending the Default Theme',
+                link: 'extending-default-theme',
               },
-              { text: "Build-Time Data Loading", link: "data-loading" },
-              { text: "SSR Compatibility", link: "ssr-compat" },
-              { text: "Connecting to a CMS", link: "cms" },
+              { text: 'Build-Time Data Loading', link: 'data-loading' },
+              { text: 'SSR Compatibility', link: 'ssr-compat' },
+              { text: 'Connecting to a CMS', link: 'cms' },
             ],
           },
           {
-            text: "Experimental",
+            text: 'Experimental',
             collapsed: false,
             items: [
-              { text: "MPA Mode", link: "mpa-mode" },
-              { text: "Sitemap Generation", link: "sitemap-generation" },
+              { text: 'MPA Mode', link: 'mpa-mode' },
+              { text: 'Sitemap Generation', link: 'sitemap-generation' },
             ],
           },
           {
-            text: "Config & API Reference",
-            base: "/reference/",
-            link: "site-config",
+            text: 'Config & API Reference',
+            base: '/reference/',
+            link: 'site-config',
           },
         ],
       },
     },
 
     editLink: {
-      pattern: "https://github.com/baicie/deft-reader/edit/main/docs/:path",
-      text: "Edit this page on GitHub",
+      pattern: 'https://github.com/baicie/deft-reader/edit/main/docs/:path',
+      text: 'Edit this page on GitHub',
     },
 
     footer: {
-      message: "Released under the MIT License.",
-      copyright: "Copyright © 2019-present ",
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2019-present ',
     },
   },
-});
+})

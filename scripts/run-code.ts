@@ -8,13 +8,14 @@ function main() {
   switch (platform()) {
     case 'win32':
       // eslint-disable-next-line no-case-declarations
-      const powerShellCommand = 'Start-Process code -ArgumentList "--extensionDevelopmentPath=$(pwd)" -PassThru'
+      const powerShellCommand =
+        'Start-Process code -ArgumentList "--extensionDevelopmentPath=$(pwd)" -PassThru'
       execSync(`powershell -Command "& { ${powerShellCommand} }"`, {
         cwd: extensionPath,
       })
       break
     case 'darwin':
-      execSync('bash -exec \'code --extensionDevelopmentPath=$(pwd)\'', {
+      execSync("bash -exec 'code --extensionDevelopmentPath=$(pwd)'", {
         cwd: extensionPath,
       })
       break

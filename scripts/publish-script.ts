@@ -28,16 +28,20 @@ async function main() {
   const pkgs: MyProject[] = await getWorkspacePackages()
 
   const publishPackage = async (project: MyProject) =>
-    execSync('pnpm publish --access public --no-git-checks', { cwd: project.dir, stdio: 'inherit' })
+    execSync('pnpm publish --access public --no-git-checks', {
+      cwd: project.dir,
+      stdio: 'inherit',
+    })
 
   // const publishExtensions = async (project: MyProject) => execSync('pnpm publish --access public --no-git-checks', { cwd: project.dir, stdio: 'inherit' })
 
   try {
-    const publishd = pkgs.filter(pkg => pkg.manifest.config?.publish)
+    const publishd = pkgs.filter((pkg) => pkg.manifest.config?.publish)
     // publishd.filter(pkg => pkg.manifest.config?.type === 'extension').forEach(publishExtensions)
-    publishd.filter(pkg => pkg.manifest.config?.type === 'package').forEach(publishPackage)
-  }
-  catch (error) {
+    publishd
+      .filter((pkg) => pkg.manifest.config?.type === 'package')
+      .forEach(publishPackage)
+  } catch (error) {
     errorAndExit(error as Error)
   }
 
