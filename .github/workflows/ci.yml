@@ -15,6 +15,7 @@ on:
   push:
     branches:
       - master
+      - future/*
   pull_request:
   workflow_dispatch:
 
