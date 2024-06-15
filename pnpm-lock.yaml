@@ -118,6 +118,9 @@ importers:
       oxlint:
         specifier: ^0.4.3
         version: 0.4.3
+      playwright-chromium:
+        specifier: ^1.44.1
+        version: 1.44.1
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
@@ -10874,6 +10877,22 @@ packages:
       {
         integrity: sha512-ko14TjmDuQJ14zsotODv7dBlwxKhUKQEhuhmbqo1uCi9BB0Z2alo/wAXg6q1dTR5TyuqYyWhjtfe/Tsh+X28jQ==,
       }
+
+  playwright-chromium@1.44.1:
+    resolution:
+      {
+        integrity: sha512-S35fvljThsCDhUiGSYST3MkT7hsUvNA6SC+fAaBxKLUdOkc6ohatxD+A5HoN7fEK3zE+yI0ARANSGRHTHJR6UQ==,
+      }
+    engines: { node: '>=16' }
+    hasBin: true
+
+  playwright-core@1.44.1:
+    resolution:
+      {
+        integrity: sha512-wh0JWtYTrhv1+OSsLPgFzGzt67Y7BE/ZS3jEqgGBlp2ppp1ZDj8c+9IARNW4dwf1poq5MgHreEM2KV/GuR4cFA==,
+      }
+    engines: { node: '>=16' }
+    hasBin: true
 
   pluralize@8.0.0:
     resolution:
@@ -21658,6 +21677,12 @@ snapshots:
       confbox: 0.1.7
       mlly: 1.7.1
       pathe: 1.1.2
+
+  playwright-chromium@1.44.1:
+    dependencies:
+      playwright-core: 1.44.1
+
+  playwright-core@1.44.1: {}
 
   pluralize@8.0.0: {}
 
