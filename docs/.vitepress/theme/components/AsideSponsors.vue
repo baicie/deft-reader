@@ -23,7 +23,6 @@ const sponsors = computed(() => {
     href="https://viteconf.org/23/replay?utm=vite-sidebar"
     target="_blank"
   >
-    <img width="22" height="22" src="/viteconf.svg" />
     <span>
       <p class="extra-info">Beyond Fast</p>
       <p class="heading">ViteConf 2023</p>

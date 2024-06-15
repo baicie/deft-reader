@@ -9,7 +9,8 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: '../core/static',
+    outDir: '../api/static',
+    emptyOutDir: true,
   },
   server: {
     proxy: {

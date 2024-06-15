@@ -1,6 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing'
-import { ConfigController } from './config.controller'
-import { ConfigService } from './config.service'
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing'
+import { beforeEach, describe, expect } from 'vitest'
+import { ConfigController } from '../config.controller'
+import { ConfigService } from '../config.service'
 
 describe('ConfigController', () => {
   let controller: ConfigController

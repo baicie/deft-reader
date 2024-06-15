@@ -1,5 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing'
-import { UploadService } from './upload.service'
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing'
+import { beforeEach, describe, expect } from 'vitest'
+import { UploadService } from '../upload.service'
 
 describe('UploadService', () => {
   let service: UploadService

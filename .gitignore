@@ -2,3 +2,4 @@ node_modules
 cache
 .turbo
 .eslintcache
+database.sqlite

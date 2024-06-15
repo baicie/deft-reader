@@ -1,8 +1,8 @@
-import { NestExpressApplication } from '@nestjs/platform-express'
-import { NextFunction, Request, Response } from 'express'
-import { join } from 'path'
+import { join } from 'node:path'
+import type { NestExpressApplication } from '@nestjs/platform-express'
+import type { NextFunction, Request, Response } from 'express'
 
-export function setupStaticFiles(app: NestExpressApplication) {
+export function setupStaticFiles(app: NestExpressApplication): void {
   app.useStaticAssets(join(__dirname, '../static'), {
     index: false, // 禁用默认目录索引
     redirect: false // 禁用从 URL 末尾 "/" 重定向到默认文件名

@@ -7,7 +7,7 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons'
 import { Button, Layout, Menu, theme } from 'antd'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const { Header, Sider, Content } = Layout
 
@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken()
+  const navigate = useNavigate()
 
   return (
     <Layout>
@@ -39,11 +40,13 @@ const App: React.FC = () => {
               key: '1',
               icon: <UserOutlined />,
               label: 'nav 1',
+              onClick: () => navigate('/'),
             },
             {
               key: '2',
               icon: <VideoCameraOutlined />,
               label: 'nav 2',
+              onClick: () => navigate('/demo'),
             },
             {
               key: '3',

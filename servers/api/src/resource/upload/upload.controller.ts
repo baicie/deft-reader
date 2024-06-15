@@ -1,7 +1,7 @@
+import { extname } from 'node:path'
 import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
-import { extname } from 'path'
 
 @Controller('upload')
 export class UploadController {
@@ -21,7 +21,10 @@ export class UploadController {
       })
     })
   )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  uploadFile(@UploadedFile() file: Express.Multer.File): {
+    message: string
+    filename: string
+  } {
     // 文件信息会自动注入到 file 参数中
     console.log(file)
     return {

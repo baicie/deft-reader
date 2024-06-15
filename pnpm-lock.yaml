@@ -157,6 +157,9 @@ importers:
       typescript-eslint:
         specifier: ^7.13.0
         version: 7.13.0(eslint@9.4.0)(typescript@5.4.5)
+      unplugin-swc:
+        specifier: ^1.4.5
+        version: 1.4.5(@swc/core@1.5.29)(rollup@4.18.0)
       vite:
         specifier: ^5.2.13
         version: 5.2.13(@types/node@20.14.2)(sass@1.77.5)(terser@5.31.1)
@@ -232,6 +235,9 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+      serve-static:
+        specifier: ^1.15.0
+        version: 1.15.0
       sql.js:
         specifier: ^1.10.3
         version: 1.10.3
@@ -275,6 +281,9 @@ importers:
       eslint-plugin-prettier:
         specifier: ^5.1.3
         version: 5.1.3(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@9.4.0))(eslint@9.4.0)(prettier@3.3.2)
+      express:
+        specifier: ^4.19.2
+        version: 4.19.2
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.14.2)(ts-node@10.9.2(@swc/core@1.5.29)(@types/node@20.14.2)(typescript@5.4.5))
@@ -13657,6 +13666,21 @@ packages:
       }
     engines: { node: '>= 0.8' }
 
+  unplugin-swc@1.4.5:
+    resolution:
+      {
+        integrity: sha512-ltkJ70kjL53onJrypaMmKDiOvhghNUCbCxjxT6Ir0eAMIBsOfRhPt6vQtxB8R/6wYk/TfIJ2gCgdx2uKNPJRHA==,
+      }
+    peerDependencies:
+      '@swc/core': ^1.2.108
+
+  unplugin@1.10.1:
+    resolution:
+      {
+        integrity: sha512-d6Mhq8RJeGA8UfKCu54Um4lFA0eSaRa3XxdAJg8tIdxbu1ubW0hBCZUL7yI2uGyYCRndvbK8FLHzqy2XKfeMsg==,
+      }
+    engines: { node: '>=14.0.0' }
+
   untildify@4.0.0:
     resolution:
       {
@@ -14020,6 +14044,12 @@ packages:
         integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==,
       }
     engines: { node: '>=10.13.0' }
+
+  webpack-virtual-modules@0.6.2:
+    resolution:
+      {
+        integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==,
+      }
 
   webpack@5.90.1:
     resolution:
@@ -23510,6 +23540,22 @@ snapshots:
 
   unpipe@1.0.0: {}
 
+  unplugin-swc@1.4.5(@swc/core@1.5.29)(rollup@4.18.0):
+    dependencies:
+      '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
+      '@swc/core': 1.5.29
+      load-tsconfig: 0.2.5
+      unplugin: 1.10.1
+    transitivePeerDependencies:
+      - rollup
+
+  unplugin@1.10.1:
+    dependencies:
+      acorn: 8.11.3
+      chokidar: 3.6.0
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.6.2
+
   untildify@4.0.0: {}
 
   update-browserslist-db@1.0.16(browserslist@4.23.1):
@@ -23783,6 +23829,8 @@ snapshots:
   webpack-node-externals@3.0.0: {}
 
   webpack-sources@3.2.3: {}
+
+  webpack-virtual-modules@0.6.2: {}
 
   webpack@5.90.1(@swc/core@1.5.29)(esbuild@0.21.5):
     dependencies:
