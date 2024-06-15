@@ -10,8 +10,6 @@ import router from './router'
 registerGlobalModules()
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Suspense fallback={<div>loading</div>}>
-      <RouterProvider router={router} />
-    </Suspense>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )

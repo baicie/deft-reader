@@ -11,6 +11,22 @@ export default defineConfig({
   build: {
     outDir: '../api/static',
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'js/[name].[hash].js',
+        entryFileNames: 'js/[name].[hash].js',
+        manualChunks(id) {
+          // 分包
+          if (id.includes('node_modules')) {
+            return id
+              .toString()
+              .split('node_modules/')[1]
+              .split('/')[0]
+              .toString()
+          }
+        },
+      },
+    },
   },
   server: {
     proxy: {

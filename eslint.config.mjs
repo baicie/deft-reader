@@ -98,10 +98,7 @@ export default tseslint.config(
       '@typescript-eslint/no-inferrable-types': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-var-requires': 'off',
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        { prefer: 'type-imports', disallowTypeAnnotations: false },
-      ],
+      '@typescript-eslint/consistent-type-imports': ['off'],
       // disable rules set in @typescript-eslint/stylistic v6 that wasn't set in @typescript-eslint/recommended v5 and which conflict with current code
       // maybe we should turn them on in a new PR
       '@typescript-eslint/array-type': 'off',
