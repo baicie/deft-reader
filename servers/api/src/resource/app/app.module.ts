@@ -1,18 +1,37 @@
-import { join } from 'node:path'
 import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ServeStaticModule } from '@nestjs/serve-static'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n'
+import { CustomLoggerService } from '../../config/logger.service'
 import { typeOrmConfig } from '../../config/typeorm.config'
-import { UsersModule } from '../users/users.module'
+import { i18nPath, staticPath } from '../../path'
+import { DeftConfigModule } from '../deft-config/config.module'
+import { LogsModule } from '../deft-log/logs.module'
 import { UploadModule } from '../upload/upload.module'
+import { UsersModule } from '../users/users.module'
+import { UserRepository } from '../users/user.repository'
+import { User } from '../users/entities/user.entity'
+import { AuthModule } from '../auth/auth.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { InitializationService } from '@/config/initialization.service'
 
 @Module({
   imports: [
+    I18nModule.forRoot({
+      fallbackLanguage: 'zh',
+      loaderOptions: {
+        path: i18nPath,
+        watch: true
+      },
+      resolvers: [
+        { use: QueryResolver, options: ['lang'] },
+        AcceptLanguageResolver
+      ]
+    }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../static'), // 指定前端打包后的静态文件路径
+      rootPath: staticPath, // 指定前端打包后的静态文件路径
       exclude: ['/api/(.*)']
     }),
     ConfigModule.forRoot({ isGlobal: true }),
@@ -22,10 +41,20 @@ import { AppService } from './app.service'
         typeOrmConfig(configService),
       inject: [ConfigService]
     }),
+    TypeOrmModule.forFeature([User]),
     UsersModule,
-    UploadModule
+    UploadModule,
+    DeftConfigModule,
+    LogsModule,
+    AuthModule
   ],
   controllers: [AppController], // 注册你的控制器
-  providers: [AppService] // 注册你的服务
+  providers: [
+    AppService,
+    CustomLoggerService,
+    InitializationService,
+    UserRepository
+  ], // 注册你的服务
+  exports: [CustomLoggerService]
 })
 export class AppModule {}

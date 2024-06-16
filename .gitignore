@@ -3,3 +3,11 @@ cache
 .turbo
 .eslintcache
 database.sqlite
+database.*
+dist/
+**/dist/
+uploads
+**/uploads
+log
+**/log
+.vscode

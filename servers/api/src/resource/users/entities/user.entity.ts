@@ -6,8 +6,14 @@ export class User {
   id: number
 
   @Column()
-  name: string
+  username: string
+
+  @Column({ nullable: true })
+  email: string
 
   @Column()
-  email: string
+  password: string
+
+  // @Column()
+  // role: string
 }

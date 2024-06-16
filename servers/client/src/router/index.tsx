@@ -1,10 +1,11 @@
-import { lazy } from 'react'
+import { Suspense, lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import Layout from '../layout'
 
 const Demo = lazy(() => import('../view/demo/demo-container'))
+const Loading = () => <div>Loading...</div>
 
 export const routes: RouteObject[] = [
   {
@@ -17,7 +18,11 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/demo',
-        element: <Demo />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Demo />
+          </Suspense>
+        ),
       },
     ],
   },

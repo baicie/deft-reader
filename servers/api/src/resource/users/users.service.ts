@@ -31,4 +31,17 @@ export class UsersService {
   async remove(id: number): Promise<void> {
     await this.userRepository.delete(id)
   }
+
+  async findByUsername(username: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { username } })
+  }
+
+  async createUser(
+    username: string,
+    password: string,
+    email?: string
+  ): Promise<User> {
+    const user = this.userRepository.create({ username, password, email })
+    return this.userRepository.save(user)
+  }
 }
