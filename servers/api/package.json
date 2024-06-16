@@ -75,6 +75,7 @@
     "dist",
     "static",
     ".env",
-    "bootstrap.d.ts"
+    "bootstrap.d.ts",
+    "locales"
   ]
 }
