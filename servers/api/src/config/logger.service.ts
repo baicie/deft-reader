@@ -14,10 +14,16 @@ export class CustomLoggerService implements LoggerService {
     this.logger = createLogger({
       level: 'info',
       format: format.combine(
-        format.timestamp(),
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         format.errors({ stack: true }),
         format.splat(),
-        format.json()
+        format.printf(({ timestamp, level, message, ...meta }) => {
+          let logMessage = `${timestamp} [${level}] ${message}`
+          if (meta.stack) {
+            logMessage += `\nStack Trace: ${meta.stack}`
+          }
+          return logMessage
+        })
       ),
       transports: [
         new transports.Console(),

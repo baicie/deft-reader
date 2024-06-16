@@ -1,6 +1,6 @@
-import type { TestingModule } from '@nestjs/testing'
-import { Test } from '@nestjs/testing'
+import { Test, TestingModule } from '@nestjs/testing'
 import { beforeEach, describe, expect } from 'vitest'
+import { ConfigModule } from '@nestjs/config'
 import { ConfigService } from '../config.service'
 
 describe('ConfigService', () => {
@@ -8,6 +8,7 @@ describe('ConfigService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [ConfigModule.forRoot()],
       providers: [ConfigService]
     }).compile()
 

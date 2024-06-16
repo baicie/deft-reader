@@ -4,7 +4,12 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
     include: ['**/__tests__/**/*.spec.[tj]s'],
-    exclude: ['**/node_modules/**', '**/dist/**', './playground/**/*.*'],
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      './playground/**/*.*',
+      '**/__tests__/**/*.e2e.spec.[tj]s',
+    ],
     testTimeout: 20000,
     isolate: false,
     globals: true,

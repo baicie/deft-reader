@@ -1,18 +1,19 @@
-import { resolve } from 'node:path'
+import type { INestApplication } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
 import type { TestingModule } from '@nestjs/testing'
 import { Test } from '@nestjs/testing'
-import type { INestApplication } from '@nestjs/common'
 import * as dotenv from 'dotenv'
 import request from 'supertest'
-import { AppModule } from '../src/resource/app/app.module'
+import { testEnvPath } from '../../../path'
+import { AppModule } from '../app.module'
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication
 
   beforeAll(async () => {
-    dotenv.config({ path: resolve(__dirname, '../.env') })
+    dotenv.config({ path: testEnvPath })
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule]
+      imports: [ConfigModule.forRoot(), AppModule]
     }).compile()
 
     app = moduleFixture.createNestApplication()

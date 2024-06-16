@@ -1,19 +1,21 @@
-import { join } from 'node:path'
 import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ServeStaticModule } from '@nestjs/serve-static'
-import { typeOrmConfig } from '../../config/typeorm.config'
-import { UsersModule } from '../users/users.module'
-import { UploadModule } from '../upload/upload.module'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import { CustomLoggerService } from '../../config/logger.service'
+import { typeOrmConfig } from '../../config/typeorm.config'
+import { staticPath } from '../../path'
+import { DeftConfigModule } from '../deft-config/config.module'
+import { LogsModule } from '../deft-log/logs.module'
+import { UploadModule } from '../upload/upload.module'
+import { UsersModule } from '../users/users.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../static'), // 指定前端打包后的静态文件路径
+      rootPath: staticPath, // 指定前端打包后的静态文件路径
       exclude: ['/api/(.*)']
     }),
     ConfigModule.forRoot({ isGlobal: true }),
@@ -24,7 +26,9 @@ import { AppService } from './app.service'
       inject: [ConfigService]
     }),
     UsersModule,
-    UploadModule
+    UploadModule,
+    DeftConfigModule,
+    LogsModule
   ],
   controllers: [AppController], // 注册你的控制器
   providers: [AppService, CustomLoggerService], // 注册你的服务
