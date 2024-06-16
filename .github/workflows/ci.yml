@@ -108,9 +108,9 @@ jobs:
         if: steps.changed-files.outputs.only_changed != 'true'
         run: pnpm run test-unit
 
-      # - name: Test serve
-      #   if: steps.changed-files.outputs.only_changed != 'true'
-      #   run: pnpm run test-serve
+      - name: Test e2e
+        if: steps.changed-files.outputs.only_changed != 'true'
+        run: pnpm run test-e2e
 
       # - name: Test build
       #   if: steps.changed-files.outputs.only_changed != 'true'
