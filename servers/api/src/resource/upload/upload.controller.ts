@@ -2,8 +2,10 @@ import { extname } from 'node:path'
 import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
+import { ApiTags } from '@nestjs/swagger'
 
 @Controller('upload')
+@ApiTags('upload')
 export class UploadController {
   @Post()
   @UseInterceptors(

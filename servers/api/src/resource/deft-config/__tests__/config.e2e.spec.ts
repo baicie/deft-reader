@@ -4,13 +4,14 @@ import { Test, TestingModule } from '@nestjs/testing'
 import * as dotenv from 'dotenv'
 import request from 'supertest'
 import { DeftConfigModule } from '../config.module'
-import { testEnvPath } from '../../../path'
+import { testEnvPath } from '@/path'
 
 describe('DeftConfigModule (e2e)', () => {
   let app: INestApplication
 
   beforeAll(async () => {
     dotenv.config({ path: testEnvPath })
+
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [ConfigModule.forRoot(), DeftConfigModule]
     }).compile()

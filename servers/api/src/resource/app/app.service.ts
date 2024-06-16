@@ -9,4 +9,10 @@ export class AppService {
       lang: I18nContext.current().lang
     })
   }
+
+  getProfile(): string {
+    return this.i18n.t('test.profile', {
+      lang: I18nContext.current().lang
+    })
+  }
 }

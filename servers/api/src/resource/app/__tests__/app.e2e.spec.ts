@@ -3,9 +3,9 @@ import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import * as dotenv from 'dotenv'
 import request from 'supertest'
-import { testEnvPath } from '../../../path'
 import { AppModule } from '../app.module'
-import { DeftResponseType } from '../../../common/response.type'
+import { testEnvPath } from '@/path'
+import { DeftResponseType } from '@/common/response.type'
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication

@@ -10,8 +10,12 @@ import { DeftConfigModule } from '../deft-config/config.module'
 import { LogsModule } from '../deft-log/logs.module'
 import { UploadModule } from '../upload/upload.module'
 import { UsersModule } from '../users/users.module'
+import { UserRepository } from '../users/user.repository'
+import { User } from '../users/entities/user.entity'
+import { AuthModule } from '../auth/auth.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { InitializationService } from '@/config/initialization.service'
 
 @Module({
   imports: [
@@ -37,13 +41,20 @@ import { AppService } from './app.service'
         typeOrmConfig(configService),
       inject: [ConfigService]
     }),
+    TypeOrmModule.forFeature([User]),
     UsersModule,
     UploadModule,
     DeftConfigModule,
-    LogsModule
+    LogsModule,
+    AuthModule
   ],
   controllers: [AppController], // 注册你的控制器
-  providers: [AppService, CustomLoggerService], // 注册你的服务
+  providers: [
+    AppService,
+    CustomLoggerService,
+    InitializationService,
+    UserRepository
+  ], // 注册你的服务
   exports: [CustomLoggerService]
 })
 export class AppModule {}
