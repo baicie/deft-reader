@@ -37,8 +37,4 @@ export default defineWorkspace([
     root: 'servers/cli',
     ...commonConfig,
   },
-  {
-    root: 'packages/empty-test',
-    ...commonConfig,
-  },
 ])
