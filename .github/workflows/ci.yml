@@ -36,7 +36,7 @@ jobs:
           - os: macos-latest
             node_version: 20
           - os: windows-latest
-            node_version: 20.13.1
+            node_version: 20
       fail-fast: false
 
     name: "Build&Test: node-${{ matrix.node_version }}, ${{ matrix.os }}"
