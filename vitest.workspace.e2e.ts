@@ -1,16 +1,16 @@
+import path from 'node:path'
 import swc from 'unplugin-swc'
-import { defineConfig } from 'vitest/config'
+import { defineConfig, defineWorkspace } from 'vitest/config'
 
-export default defineConfig({
+const commonConfig = defineConfig({
   test: {
     include: ['**/__tests__/**/*.e2e.spec.[tj]s'],
     exclude: ['**/node_modules/**', '**/dist/**', 'servers/api/**'],
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: './playground/setup.ts',
+    setupFiles: path.resolve(__dirname, './playground/setup.ts'),
     deps: {
-      moduleDirectories: ['node_modules', 'packages', 'servers'],
       interopDefault: true,
     },
   },
@@ -25,3 +25,12 @@ export default defineConfig({
     }),
   ],
 })
+
+// defineWorkspace 会提供一个很好的类型提示开发体验
+export default defineWorkspace([
+  'servers/api',
+  {
+    root: 'servers/cli',
+    ...commonConfig,
+  },
+])
