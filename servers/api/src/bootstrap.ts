@@ -15,7 +15,7 @@ export async function bootstrap(envFile: string = envPath) {
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const configService = app.get(ConfigService)
-  const port = configService.get<number>('SERVER_PORT') || 3000
+  let port = configService.get<number>('SERVER_PORT') || 3000
 
   app.setGlobalPrefix('api')
   // has web static
@@ -30,5 +30,19 @@ export async function bootstrap(envFile: string = envPath) {
   setupSwagger(app)
   app.useLogger(logger)
 
-  await app.listen(port)
+  while (true) {
+    try {
+      await app.listen(port)
+      console.log(`Server is running on http://localhost:${port}`)
+      break
+    } catch (error) {
+      if (error.code === 'EADDRINUSE') {
+        console.log(`Port ${port} is already in use, trying ${port + 1}`)
+        port++
+      } else {
+        console.error('Error occurred while starting the server:', error)
+        process.exit(1)
+      }
+    }
+  }
 }
