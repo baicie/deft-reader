@@ -116,13 +116,6 @@ jobs:
       #   if: steps.changed-files.outputs.only_changed != 'true'
       #   run: pnpm run test-build
 
-      - name: Dead links
-        run: |
-          sudo npm install -g markdown-link-check@3.12.2
-          for file in $(find . -name "*.md"); do
-            markdown-link-check -c .dlc.json -q "$file"
-          done
-
   lint:
     timeout-minutes: 10
     runs-on: ubuntu-latest
@@ -153,6 +146,13 @@ jobs:
 
       - name: Typecheck
         run: pnpm run typecheck
+
+      - name: Dead links
+        run: |
+          sudo npm install -g markdown-link-check@3.12.2
+          for file in $(find . -name "*.md"); do
+            markdown-link-check -c .dlc.json -q "$file"
+          done
 
       #   - name: Test docs
       #     run: pnpm run test-docs
