@@ -14,8 +14,8 @@ export const en = defineConfig({
     nav: [
       {
         text: 'Guide',
-        link: '/zh/guide/what-is-deft-reader',
-        activeMatch: '/zh/guide/',
+        link: '/guide/what-is-deft-reader',
+        activeMatch: '/guide/',
       },
       {
         text: pkg.version,
@@ -33,56 +33,13 @@ export const en = defineConfig({
     ],
 
     sidebar: {
-      '/en/guide': {
-        base: '/en/guide/',
+      '/guide': {
+        base: '/guide/',
         items: [
           {
             text: 'Introduction',
             collapsed: false,
-            items: [
-              { text: 'What is VitePress?', link: 'what-is-vitepress' },
-              { text: 'Getting Started', link: 'getting-started' },
-              { text: 'Routing', link: 'routing' },
-              { text: 'Deploy', link: 'deploy' },
-            ],
-          },
-          {
-            text: 'Writing',
-            collapsed: false,
-            items: [
-              { text: 'Markdown Extensions', link: 'markdown' },
-              { text: 'Asset Handling', link: 'asset-handling' },
-              { text: 'Frontmatter', link: 'frontmatter' },
-              { text: 'Using Vue in Markdown', link: 'using-vue' },
-              { text: 'Internationalization', link: 'i18n' },
-            ],
-          },
-          {
-            text: 'Customization',
-            collapsed: false,
-            items: [
-              { text: 'Using a Custom Theme', link: 'custom-theme' },
-              {
-                text: 'Extending the Default Theme',
-                link: 'extending-default-theme',
-              },
-              { text: 'Build-Time Data Loading', link: 'data-loading' },
-              { text: 'SSR Compatibility', link: 'ssr-compat' },
-              { text: 'Connecting to a CMS', link: 'cms' },
-            ],
-          },
-          {
-            text: 'Experimental',
-            collapsed: false,
-            items: [
-              { text: 'MPA Mode', link: 'mpa-mode' },
-              { text: 'Sitemap Generation', link: 'sitemap-generation' },
-            ],
-          },
-          {
-            text: 'Config & API Reference',
-            base: '/reference/',
-            link: 'site-config',
+            items: [{ text: 'what is', link: 'what-is-deft-reader' }],
           },
         ],
       },
