@@ -149,6 +149,8 @@ jobs:
 
       - name: Dead links
         run: |
+          cd docs
+          pnpm install -g markdown-link-check
           for file in $(find . -name "*.md"); do
             markdown-link-check -c .dlc.json -q "$file"
           done
