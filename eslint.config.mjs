@@ -136,6 +136,8 @@ export default tseslint.config(
       parserOptions: {
         sourceType: 'module',
         ecmaVersion: 2022,
+        project: ['./tsconfig.json', './packages/*/tsconfig.json'],
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         '...globals.node': true,

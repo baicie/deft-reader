@@ -1,7 +1,7 @@
 import { BookPlugin } from './plugin'
 
 class PluginManager {
-  private plugins: Map<string, BookPlugin> = new Map()
+  private plugins = new Map<string, BookPlugin>()
 
   registerPlugin(plugin: BookPlugin) {
     this.plugins.set(plugin.format, plugin)
