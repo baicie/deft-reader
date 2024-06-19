@@ -149,7 +149,6 @@ jobs:
 
       - name: Dead links
         run: |
-          sudo npm install -g markdown-link-check@3.12.2
           for file in $(find . -name "*.md"); do
             markdown-link-check -c .dlc.json -q "$file"
           done
