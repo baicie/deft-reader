@@ -1,11 +1,25 @@
-import { Suspense, lazy } from 'react'
+import { LazyExoticComponent, Suspense, lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
-import App from '../App'
 import Layout from '../layout'
 
+const Overview = lazy(() => import('../view/overview/overview-container'))
 const Demo = lazy(() => import('../view/demo/demo-container'))
 const Loading = () => <div>Loading...</div>
+
+const warpCom = (
+  Com: LazyExoticComponent<
+    (() => JSX.Element) & {
+      displayName: string
+    }
+  >,
+) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Com />
+    </Suspense>
+  )
+}
 
 export const routes: RouteObject[] = [
   {
@@ -14,15 +28,11 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <App />,
+        element: warpCom(Overview),
       },
       {
         path: '/demo',
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Demo />
-          </Suspense>
-        ),
+        element: warpCom(Demo),
       },
     ],
   },

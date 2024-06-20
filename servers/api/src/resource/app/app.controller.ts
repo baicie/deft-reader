@@ -2,7 +2,7 @@ import { Controller, Get, HttpStatus, UseGuards } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AppService } from './app.service'
 import { HelloWorldDto } from './dto/hello-world.dto'
-import { DeftResponseType } from '@/common/response.type'
+import { DeftResponseStatus, DeftResponseType } from '@/common/response.type'
 import { JwtAuthGuard } from '@/config/jwt-auth.guard'
 
 @Controller('')
@@ -13,7 +13,7 @@ export class AppController {
   @Get()
   @ApiOperation({ summary: 'Get hello message' })
   @ApiResponse({
-    status: HttpStatus.OK,
+    status: DeftResponseStatus.SUCCESS,
     description: 'Success',
     type: HelloWorldDto
   })
@@ -21,7 +21,7 @@ export class AppController {
     return {
       data: this.appService.getHello(),
       message: 'User retrieved successfully',
-      statusCode: HttpStatus.OK
+      statusCode: DeftResponseStatus.SUCCESS
     }
   }
 
@@ -29,7 +29,7 @@ export class AppController {
   @Get('profile')
   @ApiOperation({ summary: 'Get user profile' })
   @ApiResponse({
-    status: HttpStatus.OK,
+    status: DeftResponseStatus.SUCCESS,
     description: 'Success',
     type: HelloWorldDto
   })
@@ -37,7 +37,7 @@ export class AppController {
     return {
       data: this.appService.getProfile(),
       message: 'User retrieved successfully',
-      statusCode: HttpStatus.OK
+      statusCode: DeftResponseStatus.SUCCESS
     }
   }
 }

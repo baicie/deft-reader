@@ -18,3 +18,7 @@ export class ApiResponseDto {
   })
   message: string
 }
+
+export enum DeftResponseStatus {
+  SUCCESS = 0
+}

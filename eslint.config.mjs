@@ -119,6 +119,7 @@ export default tseslint.config(
       '**/temp/**',
       '**/.vitepress/cache/**',
       '**/*.snap',
+      '**/.eslintrc.cjs',
     ],
   },
   eslint.configs.recommended,

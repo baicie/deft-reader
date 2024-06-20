@@ -1,26 +1,24 @@
-import {
-  Button,
-  ConfigProvider,
-  DatePicker,
-  Radio,
-  Upload,
-  message,
-} from 'antd'
-import type { UploadProps, RadioChangeEvent } from 'antd'
-import zhCN from 'antd/lib/locale/zh_CN'
+import { ConfigProvider } from 'antd'
 import enUS from 'antd/lib/locale/en_US'
 import frFR from 'antd/lib/locale/fr_FR'
+import zhCN from 'antd/lib/locale/zh_CN'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en'
 import 'dayjs/locale/fr'
 import 'dayjs/locale/zh-cn'
-import { useCallback, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { UploadOutlined } from '@ant-design/icons'
+import { observer } from 'mobx-react-lite'
+import { useEffect, useState } from 'react'
+import { I18nextProvider, useTranslation } from 'react-i18next'
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
+import { useInjectable } from './hooks/use-di'
+import { Config } from './store/config'
+import locales from './locales'
 
-function App() {
-  const { t, i18n } = useTranslation()
+export default observer(() => {
+  const { i18n } = useTranslation()
   const [antdLocale, setAntdLocale] = useState(enUS)
+  const config = useInjectable(Config)
 
   useEffect(() => {
     const handleLanguageChange = (lng: string) => {
@@ -53,50 +51,15 @@ function App() {
     }
   }, [i18n])
 
-  const changeLocale = useCallback((e: RadioChangeEvent) => {
-    i18n.changeLanguage(e.target.value)
+  useEffect(() => {
+    config.queryConfig()
   }, [])
-
-  const props: UploadProps = {
-    name: 'file',
-    action: '/api/upload',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList)
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`)
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`)
-      }
-    },
-  }
 
   return (
     <ConfigProvider locale={antdLocale}>
-      <h1>{t('demo.Welcome to React')}</h1>
-
-      <DatePicker />
-
-      <DatePicker />
-
-      <Radio.Group value={i18n.language} onChange={changeLocale}>
-        <Radio.Button key="en" value={'en'}>
-          English
-        </Radio.Button>
-        <Radio.Button key="cn" value={'cn'}>
-          中文
-        </Radio.Button>
-      </Radio.Group>
-
-      <Upload {...props}>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-      </Upload>
+      <I18nextProvider i18n={locales}>
+        <RouterProvider router={router} />
+      </I18nextProvider>
     </ConfigProvider>
   )
-}
-
-export default App
+})

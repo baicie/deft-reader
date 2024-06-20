@@ -1,22 +1,43 @@
-import React, { useState } from 'react'
 import {
+  DownOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons'
-import { Button, Layout, Menu, theme } from 'antd'
+import { Button, Dropdown, Flex, Layout, Menu, MenuProps, theme } from 'antd'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const { Header, Sider, Content } = Layout
 
-const App: React.FC = () => {
+const DeftLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken()
   const navigate = useNavigate()
+  const { i18n, t } = useTranslation()
+
+  const items: MenuProps['items'] = [
+    {
+      key: 'en',
+      label: 'English',
+      onClick: () => i18n.changeLanguage('en'),
+    },
+    {
+      key: 'cn',
+      label: '中文',
+      onClick: () => i18n.changeLanguage('cn'),
+    },
+    {
+      key: 'fr',
+      label: 'Français',
+      onClick: () => i18n.changeLanguage('fr'),
+    },
+  ]
 
   return (
     <Layout>
@@ -57,17 +78,25 @@ const App: React.FC = () => {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
+        <Header style={{ padding: '0 24px 0 0', background: colorBgContainer }}>
+          <Flex justify="space-between" align="center">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: '16px',
+                width: 64,
+                height: 64,
+              }}
+            />
+
+            <Dropdown menu={{ items }}>
+              <div onClick={(e) => e.preventDefault()}>
+                {t('layout.language')} <DownOutlined />
+              </div>
+            </Dropdown>
+          </Flex>
         </Header>
         <Content
           style={{
@@ -85,4 +114,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default DeftLayout
