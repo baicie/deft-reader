@@ -102,13 +102,13 @@
     "*": [
       "prettier --write --cache --ignore-unknown"
     ],
-    "servers/*/{src,types}/**/*.ts": [
+    "*/**/{src,types}/**/*.ts": [
       "eslint --cache --fix"
     ],
-    "servers/**/*.d.ts": [
+    "*/**/*.d.ts": [
       "eslint --cache --fix"
     ],
-    "servers/**/__tests__/**/*.ts": [
+    "*/**/__tests__/**/*.ts": [
       "eslint --cache --fix"
     ]
   }
