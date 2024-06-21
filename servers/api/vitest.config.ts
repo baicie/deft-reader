@@ -1,8 +1,8 @@
 import swc from 'unplugin-swc'
-import { defineConfig } from 'vitest/config'
+import { defineProject } from 'vitest/config'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
-export default defineConfig({
+export default defineProject({
   test: {
     include: ['**/__tests__/**/*.spec.[tj]s'],
     exclude: [

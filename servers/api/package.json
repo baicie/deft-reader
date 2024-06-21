@@ -9,7 +9,9 @@
   "types": "bootstrap.d.ts",
   "scripts": {
     "dev": "nest start --watch",
-    "build": "nest build"
+    "build": "nest build",
+    "test-unit": "vitest run",
+    "test-e2e": "vitest run -c vitest.config.e2e.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.3.9",

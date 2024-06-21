@@ -1,7 +1,7 @@
+import { ConfigModule } from '@nestjs/config'
 import type { TestingModule } from '@nestjs/testing'
 import { Test } from '@nestjs/testing'
 import { beforeEach, describe, expect } from 'vitest'
-import { ConfigModule } from '@nestjs/config'
 import { ConfigController } from '../config.controller'
 import { ConfigService } from '../config.service'
 
@@ -24,7 +24,7 @@ describe('ConfigController', () => {
 
   it('should return configs', () => {
     process.env.ENABLE_LOG = 'true'
-    expect(controller.getConfig().ENABLE_LOG).toBeTypeOf('boolean')
-    expect(controller.getConfig().ENABLE_LOG).toBe(true)
+    expect(controller.getConfig().data.ENABLE_LOG).toBeTypeOf('boolean')
+    expect(controller.getConfig().data.ENABLE_LOG).toBe(true)
   })
 })
