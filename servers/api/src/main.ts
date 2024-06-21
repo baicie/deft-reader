@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { bootstrap } from './bootstrap'
 
 bootstrap().catch((err) => {

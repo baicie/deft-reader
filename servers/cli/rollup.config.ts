@@ -34,7 +34,6 @@ function cjsPatchPlugin(): Plugin {
       const s = new MagicString(code)
       // inject after the last `import`
       s.appendRight(index, cjsPatch)
-      console.log('patched cjs context: ' + chunk.fileName)
       return s.toString()
     },
   }

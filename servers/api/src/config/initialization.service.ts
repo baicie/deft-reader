@@ -1,7 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common'
 import { CustomLoggerService } from './logger.service'
 import { UserRepository } from '@/resource/users/user.repository'
-import { UsersService } from '@/resource/users/users.service'
 
 @Injectable()
 export class InitializationService implements OnModuleInit {

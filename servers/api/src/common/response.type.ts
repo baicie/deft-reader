@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-
-export interface DeftResponseType<Data = any> {
+export interface DeftResponseType<Data = unknown> {
   statusCode: number
   message: string
   data: Data

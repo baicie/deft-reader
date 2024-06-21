@@ -12,7 +12,7 @@ export class UploadController {
     FileInterceptor('file', {
       storage: diskStorage({
         destination: './uploads', // 文件保存路径
-        filename: (req, file, cb) => {
+        filename: (_, file, cb) => {
           // 自定义文件名
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9)
@@ -27,8 +27,6 @@ export class UploadController {
     message: string
     filename: string
   } {
-    // 文件信息会自动注入到 file 参数中
-    console.log(file)
     return {
       message: 'File uploaded successfully!',
       filename: file.filename

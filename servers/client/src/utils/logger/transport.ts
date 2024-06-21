@@ -3,7 +3,7 @@ import type { LogLevel } from './log-level'
 /**
  * 日志打印接口
  */
-/* eslint-disable no-unused-vars */
+
 export interface LogTransport {
   /** 级别限制，高于此级别的log不会显示 */
   readonly maxLevel: LogLevel

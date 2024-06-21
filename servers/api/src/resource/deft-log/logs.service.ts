@@ -8,12 +8,7 @@ import { logPath } from '../../path'
 export class LogsService {
   private logDirectory = logPath
 
-  async getLogs(
-    date: string,
-    start: number,
-    end: number,
-    level: string = 'combined'
-  ) {
+  async getLogs(date: string, start: number, end: number, level = 'combined') {
     const logFilePath = path.join(this.logDirectory, `${level}-${date}.log`)
 
     if (!fs.existsSync(logFilePath)) {

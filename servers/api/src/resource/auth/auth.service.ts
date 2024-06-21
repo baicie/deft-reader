@@ -10,10 +10,10 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
+  async validateUser(username: string, password: string): Promise<unknown> {
     const user = await this.userService.findByUsername(username)
     if (user && bcrypt.compareSync(password, user.password)) {
-      const { password, ...result } = user
+      const { password: _, ...result } = user // 忽略 password 字段
       return result
     }
     return null

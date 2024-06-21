@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { resolve } from 'node:path'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'

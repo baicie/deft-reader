@@ -1,1 +1,3 @@
-export const createServer = async (): Promise<void> => {}
+export const createServer = async (): Promise<void> => {
+  return Promise.resolve()
+}

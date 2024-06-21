@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -15,7 +16,7 @@ cli
   })
   .command('[root]', 'start dev server') // default command
   .alias('start')
-  .action(async (root, options) => {
+  .action(async (_, options) => {
     try {
       const envStr = `
         DATABASE_PATH=${path.resolve(__dirname, 'database.sqlite')}

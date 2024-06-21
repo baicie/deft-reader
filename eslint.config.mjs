@@ -1,14 +1,113 @@
 // @ts-check
-import { builtinModules } from 'node:module'
+import { fixupConfigRules } from '@eslint/compat'
+import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js'
-import pluginN from 'eslint-plugin-n'
-import * as pluginI from 'eslint-plugin-i'
-import pluginRegExp from 'eslint-plugin-regexp'
-import tsParser from '@typescript-eslint/parser'
-import tseslint from 'typescript-eslint'
-import globals from 'globals'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import tsEslint from '@typescript-eslint/eslint-plugin'
+import pluginRegExp from 'eslint-plugin-regexp'
+import globals from 'globals'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import tseslint from 'typescript-eslint'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  resolvePluginsRelativeTo: __dirname,
+})
+
+/**
+ * @returns {import('typescript-eslint').ConfigWithExtends}
+ */
+const getReactConfig = (
+  /** @type {{ name: string; files:(string | string[])[]; rules: any }} */ options,
+) => {
+  /**
+   * @type {import('typescript-eslint').ConfigWithExtends}
+   */
+  const reactConfig = {
+    name: options.name,
+    files: options.files,
+    languageOptions: {
+      parser: tseslint.parser,
+      globals: {
+        ...globals.browser,
+        ...globals.es2020,
+      },
+      parserOptions: {
+        project: 'tsconfig.json',
+        tsconfigRootDir: path.resolve(__dirname, options.name),
+      },
+    },
+    ...fixupConfigRules(compat.extends('plugin:react/recommended')),
+    ...fixupConfigRules(compat.extends('plugin:react-hooks/recommended')),
+    ...fixupConfigRules(compat.extends('plugin:jsx-a11y/recommended')),
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+    plugins: {
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      ...options.rules,
+    },
+  }
+  return reactConfig
+}
+
+const getNodeConfig = (
+  /** @type {{ name: string; files:(string | string[])[]; rules: any }} */ options,
+) => {
+  /**
+   * @type {import('typescript-eslint').ConfigWithExtends}
+   */
+  const nodeConfig = {
+    name: options.name,
+    files: options.files,
+    ignores: [
+      `${options.name}/vitest.config.ts`,
+      `${options.name}/vitest.config.e2e.ts`,
+    ],
+    languageOptions: {
+      parser: tseslint.parser,
+      globals: {
+        ...globals.node,
+        ...globals.es2020,
+      },
+      parserOptions: {
+        project: 'tsconfig.json',
+        tsconfigRootDir: path.resolve(__dirname, options.name),
+      },
+    },
+    rules: {
+      '@typescript-eslint/interface-name-prefix': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      'no-console': 'error',
+    },
+  }
+  return nodeConfig
+}
 
 export default tseslint.config(
   {
@@ -26,148 +125,37 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...tseslint.configs.stylistic,
   /** @type {any} */ (pluginRegExp.configs['flat/recommended']),
-  {
-    name: 'main/node',
-    files: ['servers/cli/**/*.ts', 'servers/api/**/*.ts'],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        sourceType: 'module',
-        ecmaVersion: 2022,
-      },
-      globals: {
-        ...globals.es2021,
-        ...globals.node,
-      },
-    },
-    plugins: {
-      n: pluginN,
-      i: pluginI,
-    },
-    rules: {
-      'n/no-exports-assign': 'error',
-      'n/no-unpublished-bin': 'error',
-      'n/no-unsupported-features/es-builtins': 'error',
-      'n/process-exit-as-throw': 'error',
-      'n/hashbang': 'error',
 
-      eqeqeq: ['warn', 'always', { null: 'never' }],
-      'no-debugger': ['error'],
-      'no-empty': ['warn', { allowEmptyCatch: true }],
-      'no-process-exit': 'off',
-      'no-useless-escape': 'off',
-      'prefer-const': [
-        'warn',
-        {
-          destructuring: 'all',
-        },
-      ],
-
-      'n/no-missing-require': [
-        'error',
-        {
-          allowModules: ['pnpapi', 'vite'],
-          tryExtensions: ['.ts', '.js', '.jsx', '.tsx', '.d.ts'],
-        },
-      ],
-      'n/no-extraneous-import': [
-        'error',
-        {
-          allowModules: ['vite', 'less', 'sass', 'vitest', 'unbuild'],
-        },
-      ],
-      'n/no-extraneous-require': [
-        'error',
-        {
-          allowModules: ['vite'],
-        },
-      ],
-
-      '@typescript-eslint/ban-ts-comment': 'error',
-      '@typescript-eslint/ban-types': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': ['off'],
-      '@typescript-eslint/no-empty-function': [
-        'error',
-        { allow: ['arrowFunctions'] },
-      ],
-      '@typescript-eslint/no-empty-interface': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      'no-extra-semi': 'off',
-      '@typescript-eslint/no-extra-semi': 'off',
-      '@typescript-eslint/no-inferrable-types': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
-      '@typescript-eslint/consistent-type-imports': ['off'],
-      '@typescript-eslint/array-type': 'off',
-      '@typescript-eslint/ban-tslint-comment': 'off',
-      '@typescript-eslint/consistent-generic-constructors': 'off',
-      '@typescript-eslint/consistent-indexed-object-style': 'off',
-      '@typescript-eslint/consistent-type-definitions': 'off',
-      '@typescript-eslint/prefer-for-of': 'off',
-      '@typescript-eslint/prefer-function-type': 'off',
-
-      'i/no-nodejs-modules': [
-        'error',
-        { allow: builtinModules.map((mod) => `node:${mod}`) },
-      ],
-      'i/no-duplicates': 'error',
-      'i/order': 'error',
-      'sort-imports': [
-        'error',
-        {
-          ignoreCase: false,
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-          allowSeparatedGroups: false,
-        },
-      ],
-
-      'regexp/no-contradiction-with-assertion': 'error',
-      // in some cases using explicit letter-casing is more performant than the `i` flag
-      'regexp/use-ignore-case': 'off',
-    },
-  },
-
-  {
-    name: 'main/client',
-    files: ['servers/client/**/*.{ts,tsx,js,jsx}'],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        sourceType: 'module',
-        ecmaVersion: 2020,
-      },
-      globals: {
-        ...globals.es2021,
-        ...globals.browser,
-      },
-    },
-    extends: [eslint.configs.recommended],
-    plugins: {
-      '@typescript-eslint': tsEslint,
-      'react-refresh': reactRefresh,
-    },
+  getReactConfig({
+    name: 'servers/client',
+    files: ['server/client/**/*.{js,ts}'],
     rules: {},
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-  },
+  }),
+
+  getNodeConfig({
+    name: 'servers/api',
+    files: ['servers/api/**/*.{js,ts}'],
+    rules: {},
+  }),
+
+  getNodeConfig({
+    name: 'servers/cli',
+    files: ['servers/cli/**/*.{js,ts}'],
+    rules: {},
+  }),
 
   {
     name: 'disables/js',
     files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
     rules: {
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'typescript-eslint/explicit-module-boundary-types': 'off',
     },
   },
   {
     name: 'disables/dts',
     files: ['**/*.d.ts'],
     rules: {
-      '@typescript-eslint/triple-slash-reference': 'off',
+      'typescript-eslint/triple-slash-reference': 'off',
     },
   },
   {
@@ -175,7 +163,7 @@ export default tseslint.config(
     files: ['**/__tests__/**/*.?([cm])[jt]s?(x)'],
     rules: {
       'no-console': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
+      'typescript-eslint/ban-ts-comment': 'off',
     },
   },
 )
