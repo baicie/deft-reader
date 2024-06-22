@@ -8,6 +8,12 @@ import { VERSION } from './constants'
 
 const cli = cac('deft')
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
+interface Options {
+  config: string
+  env: string
+  port: number
+}
 cli
   .option('-c, --config <file>', `[string] use specified config file`)
   .option('-e, --env <file>', `[string] use specified env file`)
@@ -16,10 +22,10 @@ cli
   })
   .command('[root]', 'start dev server') // default command
   .alias('start')
-  .action(async (_, options) => {
+  .action(async (_, options: Options) => {
     try {
       const envStr = `
-        DATABASE_PATH=${path.resolve(__dirname, 'database.sqlite')}
+        DATABASE_PATH=${path.resolve(__dirname, 'database.sqljs')}
         DATABASE_PORT=${options.port}
       `
 
