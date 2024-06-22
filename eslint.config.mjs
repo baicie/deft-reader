@@ -43,6 +43,7 @@ export default tseslint.config(
       '**/rollup.config.ts',
       '**/vitest.config.ts',
       '**/vitest.config.e2e.ts',
+      'scripts',
     ],
   },
 
