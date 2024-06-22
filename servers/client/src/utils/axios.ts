@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
 import cookies from 'js-cookie'
 import { message } from 'antd'
 import { useLogger } from '../hooks/use-logger'
@@ -19,6 +20,7 @@ const handleError = <T = Record<string, string>>(
   }>,
 ) => {
   // Print to console
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const logger = useLogger()
   message.destroy()
   message.error(res.data.message)

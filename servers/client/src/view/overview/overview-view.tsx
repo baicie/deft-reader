@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react'
+import type { TFunction } from 'i18next'
 import styles from './overview.module.scss'
-import { TFunction } from 'i18next'
 
 interface Props {
   msg: string
   onClick: () => void
-  t: TFunction<'translation', undefined>
+  t: TFunction
 }
 
 const DemoView = ({ msg, onClick, t }: Props): ReactElement => (

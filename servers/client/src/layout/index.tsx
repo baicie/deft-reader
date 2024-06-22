@@ -6,7 +6,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons'
-import { Button, Dropdown, Flex, Layout, Menu, MenuProps, theme } from 'antd'
+import type { MenuProps } from 'antd'
+import { Button, Dropdown, Flex, Layout, Menu, theme } from 'antd'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Outlet, useNavigate } from 'react-router-dom'
@@ -25,17 +26,17 @@ const DeftLayout: React.FC = () => {
     {
       key: 'en',
       label: 'English',
-      onClick: () => i18n.changeLanguage('en'),
+      onClick: () => void i18n.changeLanguage('en'),
     },
     {
       key: 'cn',
       label: '中文',
-      onClick: () => i18n.changeLanguage('cn'),
+      onClick: () => void i18n.changeLanguage('cn'),
     },
     {
       key: 'fr',
       label: 'Français',
-      onClick: () => i18n.changeLanguage('fr'),
+      onClick: () => void i18n.changeLanguage('fr'),
     },
   ]
 
@@ -61,13 +62,17 @@ const DeftLayout: React.FC = () => {
               key: '1',
               icon: <UserOutlined />,
               label: 'nav 1',
-              onClick: () => navigate('/'),
+              onClick: () => {
+                navigate('/')
+              },
             },
             {
               key: '2',
               icon: <VideoCameraOutlined />,
               label: 'nav 2',
-              onClick: () => navigate('/demo'),
+              onClick: () => {
+                navigate('/demo')
+              },
             },
             {
               key: '3',
@@ -83,7 +88,9 @@ const DeftLayout: React.FC = () => {
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
+              onClick={() => {
+                setCollapsed(!collapsed)
+              }}
               style={{
                 fontSize: '16px',
                 width: 64,
@@ -92,7 +99,16 @@ const DeftLayout: React.FC = () => {
             />
 
             <Dropdown menu={{ items }}>
-              <div onClick={(e) => e.preventDefault()}>
+              <div
+                onClick={(e) => {
+                  e.preventDefault()
+                }}
+                onKeyDown={(e) => {
+                  e.preventDefault()
+                }}
+                role="button"
+                tabIndex={0}
+              >
                 {t('layout.language')} <DownOutlined />
               </div>
             </Dropdown>

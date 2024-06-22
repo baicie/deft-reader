@@ -31,10 +31,11 @@ export async function bootstrap(envFile: string = envPath) {
   setupSwagger(app)
   app.useLogger(logger)
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     try {
       await app.listen(port)
-      console.log(`Server is running on http://localhost:${port}`)
+      console.log(`Server is running on http://localhost:${port.toString()}`)
       break
     } catch (error) {
       if (error.code === 'EADDRINUSE') {

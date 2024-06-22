@@ -19,7 +19,6 @@ const commonConfig = defineConfig({
   },
   publicDir: false,
   plugins: [
-    // @ts-expect-error - swc.vite is not typed
     swc.vite({
       module: { type: 'es6' },
     }),

@@ -1,6 +1,6 @@
-import { getConfig } from '@/service/config'
 import { action, computed, makeObservable, observable } from 'mobx'
 import { singleton } from 'tsyringe'
+import { getConfig } from '@/service/config'
 
 @singleton()
 export class Config {

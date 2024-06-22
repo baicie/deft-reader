@@ -1,4 +1,5 @@
-import { LazyExoticComponent, Suspense, lazy } from 'react'
+import type { LazyExoticComponent } from 'react'
+import { Suspense, lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../layout'

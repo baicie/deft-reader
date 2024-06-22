@@ -26,7 +26,7 @@ cli
     try {
       const envStr = `
         DATABASE_PATH=${path.resolve(__dirname, 'database.sqljs')}
-        DATABASE_PORT=${options.port}
+        DATABASE_PORT=${options.port.toString()}
       `
 
       const envFile = path.resolve(__dirname, '.env')
@@ -40,7 +40,7 @@ cli
     }
   })
 
-cli.command('config').action(async () => {
+cli.command('config').action(() => {
   console.log(__dirname)
 })
 
