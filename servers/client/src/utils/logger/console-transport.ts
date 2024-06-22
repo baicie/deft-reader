@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import dayjs from 'dayjs'
 import { LogLevel } from './log-level'
 import type { LogTransport } from './transport'

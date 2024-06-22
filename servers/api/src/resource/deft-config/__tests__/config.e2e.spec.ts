@@ -25,14 +25,20 @@ describe('DeftConfigModule (e2e)', () => {
   })
 
   it('/config (GET)', () => {
-    return request(app.getHttpServer()).get('/config').expect(200).expect({
-      DATABASE_PATH: 'database.test.sqljs',
-      ENABLE_AUTH: true,
-      ENABLE_LOG: true,
-      ENABLE_SWAGGER: true,
-      ENABLE_WEB: true,
-      LOG_PATH: 'logs',
-      SERVER_PORT: '3000'
-    })
+    return request(app.getHttpServer())
+      .get('/config')
+      .expect(200)
+      .expect((response) => {
+        const data = response.body
+        expect(data.data).toStrictEqual({
+          DATABASE_PATH: 'database.test.sqljs',
+          ENABLE_AUTH: true,
+          ENABLE_LOG: true,
+          ENABLE_SWAGGER: true,
+          ENABLE_WEB: true,
+          LOG_PATH: 'logs',
+          SERVER_PORT: '3000'
+        })
+      })
   })
 })

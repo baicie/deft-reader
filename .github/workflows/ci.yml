@@ -14,7 +14,7 @@ permissions: {}
 on:
   push:
     branches:
-      - master
+      - main
       - feat/*
   pull_request:
   workflow_dispatch:
@@ -111,10 +111,6 @@ jobs:
       - name: Test e2e
         if: steps.changed-files.outputs.only_changed != 'true'
         run: pnpm run test-e2e
-
-      # - name: Test build
-      #   if: steps.changed-files.outputs.only_changed != 'true'
-      #   run: pnpm run test-build
 
   lint:
     timeout-minutes: 10

@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { ConfigService as NestConfigService } from '@nestjs/config'
-import { Config } from './types'
+import { ConfigData } from './dto/config.dto'
 
 @Injectable()
 export class ConfigService {
   constructor(private readonly nestConfigService: NestConfigService) {}
 
-  getAllEnvVars(): Config {
-    const envVars: Config = {
+  getAllEnvVars(): ConfigData {
+    const envVars: ConfigData = {
       DATABASE_PATH: '',
       SERVER_PORT: 0,
       ENABLE_WEB: false,

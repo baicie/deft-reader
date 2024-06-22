@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "types": ["@types/node"],
+    "noEmit": true,
+    "allowJs": true
+  },
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "eslint.config.mjs",
+    "vitest.workspace.e2e.mts",
+    "vitest.workspace.mts",
+    "typings"
+  ]
+}

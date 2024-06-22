@@ -19,7 +19,6 @@ const commonConfig = defineConfig({
   },
   publicDir: false,
   plugins: [
-    // @ts-expect-error - swc.vite is not typed
     swc.vite({
       module: { type: 'es6' },
     }),
@@ -28,7 +27,7 @@ const commonConfig = defineConfig({
 
 // defineWorkspace 会提供一个很好的类型提示开发体验
 export default defineWorkspace([
-  'servers/api',
+  'servers/api/vitest.config.e2e.ts',
   {
     root: 'servers/cli',
     ...commonConfig,
