@@ -9,7 +9,7 @@ export default defineProject({
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: '../../playground/setup.ts',
+    setupFiles: './test/vitestSetup.ts',
     deps: {
       interopDefault: true
     }
@@ -19,7 +19,6 @@ export default defineProject({
   },
   publicDir: false,
   plugins: [
-    // @ts-expect-error - swc.vite is not typed
     swc.vite({
       module: { type: 'es6' }
     }),

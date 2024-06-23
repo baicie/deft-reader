@@ -18,4 +18,9 @@ describe('ConfigService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined()
   })
+
+  it('should get all env vars', () => {
+    const result = service.getAllEnvVars()
+    expect(result).toBeInstanceOf(Object)
+  })
 })

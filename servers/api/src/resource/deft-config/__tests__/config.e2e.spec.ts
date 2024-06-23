@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv'
 import request from 'supertest'
 import { DeftConfigModule } from '../config.module'
 import { testEnvPath } from '@/path'
+import { afterAll, beforeAll, expect } from 'vitest'
 
 describe('DeftConfigModule (e2e)', () => {
   let app: INestApplication

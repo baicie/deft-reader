@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "deft srart"
+    "test": "deft srart",
+    "pm2": "deft pm2"
   },
   "keywords": [],
   "author": "",

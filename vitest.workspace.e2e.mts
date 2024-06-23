@@ -1,4 +1,3 @@
-import path from 'node:path'
 import swc from 'unplugin-swc'
 import { defineConfig, defineWorkspace } from 'vitest/config'
 
@@ -9,7 +8,6 @@ const commonConfig = defineConfig({
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: path.resolve(__dirname, './playground/setup.ts'),
     deps: {
       interopDefault: true,
     },

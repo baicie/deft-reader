@@ -1,10 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { ApiResponseDto } from '../../../common/response.type'
+import { ResultDto } from '@/common/result'
 
-export class HelloWorldDto extends ApiResponseDto {
-  @ApiProperty({
-    example: 'Hello, World!',
-    description: 'Hello message'
-  })
+export class HelloResultDto extends ResultDto<string> {
+  @ApiProperty({ description: 'Response data', example: 'Hello, world!' })
   data: string
 }

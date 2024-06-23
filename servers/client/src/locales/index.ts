@@ -3,7 +3,6 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 import cn from './cn'
 import en from './en'
-import fr from './fr'
 
 i18n
   .use(LanguageDetector)
@@ -15,9 +14,6 @@ i18n
       },
       cn: {
         translation: cn,
-      },
-      fr: {
-        translation: fr,
       },
     },
     fallbackLng: 'en',

@@ -4,7 +4,7 @@ import type { RouteObject } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../layout'
 
-const Overview = lazy(() => import('../view/overview/overview-container'))
+const Books = lazy(() => import('../view/books/books-container'))
 const Demo = lazy(() => import('../view/demo/demo-container'))
 const Loading = () => <div>Loading...</div>
 
@@ -29,7 +29,7 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: warpCom(Overview),
+        element: warpCom(Books),
       },
       {
         path: '/demo',

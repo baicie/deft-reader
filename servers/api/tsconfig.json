@@ -18,9 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "~utils": ["./test/test-utils.ts"]
     }
   },
-  "include": ["src", "./bootstrap.d.ts"],
+  "include": ["src", "./bootstrap.d.ts", "test"],
   "exclude": ["static"]
 }

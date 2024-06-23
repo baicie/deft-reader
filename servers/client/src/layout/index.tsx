@@ -2,7 +2,6 @@ import {
   DownOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons'
@@ -33,15 +32,10 @@ const DeftLayout: React.FC = () => {
       label: '中文',
       onClick: () => void i18n.changeLanguage('cn'),
     },
-    {
-      key: 'fr',
-      label: 'Français',
-      onClick: () => void i18n.changeLanguage('fr'),
-    },
   ]
 
   return (
-    <Layout>
+    <Layout style={{ height: '100vh' }}>
       <Sider
         breakpoint="lg"
         collapsedWidth={0}
@@ -61,7 +55,7 @@ const DeftLayout: React.FC = () => {
             {
               key: '1',
               icon: <UserOutlined />,
-              label: 'nav 1',
+              label: t('layout.menu.books'),
               onClick: () => {
                 navigate('/')
               },
@@ -69,15 +63,10 @@ const DeftLayout: React.FC = () => {
             {
               key: '2',
               icon: <VideoCameraOutlined />,
-              label: 'nav 2',
+              label: t('layout.menu.config'),
               onClick: () => {
                 navigate('/demo')
               },
-            },
-            {
-              key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
             },
           ]}
         />
