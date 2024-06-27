@@ -23,6 +23,7 @@ const commonConfig = defineConfig({
 // defineWorkspace 会提供一个很好的类型提示开发体验
 export default defineWorkspace([
   'servers/api/vitest.config.ts',
+  'servers/client/vitest.config.ts',
   {
     root: 'servers/cli',
     ...commonConfig,
