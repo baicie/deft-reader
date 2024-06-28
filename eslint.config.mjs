@@ -45,6 +45,7 @@ export default tseslint.config(
       '**/vitest.config.e2e.ts',
       'scripts',
       'coverage',
+      'packages',
     ],
   },
 
