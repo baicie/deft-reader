@@ -17,6 +17,6 @@
     "convert-source-map": "^2.0.0",
     "css-color-names": "^1.0.1",
     "execa": "^9.3.0",
-    "playwright-chromium": "^1.44.1"
+    "playwright-chromium": "^1.45.0"
   }
 }

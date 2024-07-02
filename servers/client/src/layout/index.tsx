@@ -68,6 +68,14 @@ const DeftLayout: React.FC = () => {
                 navigate('/demo')
               },
             },
+            {
+              key: '3',
+              icon: <VideoCameraOutlined />,
+              label: t('layout.menu.log'),
+              onClick: () => {
+                navigate('/log')
+              },
+            },
           ]}
         />
       </Sider>
