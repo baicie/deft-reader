@@ -2,12 +2,21 @@
   "name": "@deft-reader/test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "private": "true",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "stub": "pnpm unbuild --stub"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "convert-source-map": "^2.0.0",
+    "css-color-names": "^1.0.1",
+    "execa": "^9.3.0",
+    "playwright-chromium": "^1.44.1"
+  }
 }
