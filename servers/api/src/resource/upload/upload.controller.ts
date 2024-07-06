@@ -18,21 +18,6 @@ import { FileUploadDto, FilesResDto, UploadResDto } from './dto/files-res.dto'
 export class UploadController {
   constructor(private readonly fileService: UploadService) {}
 
-  @Post()
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (_, file, cb) => {
-          const uniqueSuffix =
-            Date.now() + '-' + Math.round(Math.random() * 1e9)
-          const ext = extname(file.originalname)
-          const filename = `${uniqueSuffix}${ext}`
-          cb(null, filename)
-        }
-      })
-    })
-  )
   @ApiOperation({
     summary: 'Upload file',
     description: 'Upload file'
@@ -46,11 +31,32 @@ export class UploadController {
     description: 'File to upload',
     type: FileUploadDto
   })
+  @Post()
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (_, file, cb) => {
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9)
+          const originalNameBuffer = Buffer.from(file.originalname, 'latin1')
+          file.originalname = originalNameBuffer.toString('utf8')
+
+          const ext = extname(file.originalname)
+          const filename = `${uniqueSuffix}${ext}`
+          cb(null, filename)
+        }
+      })
+    })
+  )
   async uploadFile(
     @UploadedFile()
     file: Express.Multer.File
   ) {
-    const savedFile = await this.fileService.saveFile(file.filename)
+    const savedFile = await this.fileService.saveFile(
+      file.filename,
+      file.originalname
+    )
     return Result.success(savedFile.filename)
   }
 

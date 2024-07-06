@@ -2,7 +2,8 @@ import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import cookies from 'js-cookie'
 import { message } from 'antd'
-import { useLogger } from '../hooks/use-logger'
+import { Logger } from './logger/logger'
+import { container } from 'tsyringe'
 // import router from '@/router'
 // import utils from '@/utils'
 // import isJson from '@/utils/json'
@@ -21,7 +22,7 @@ const handleError = <T = Record<string, string>>(
 ) => {
   // Print to console
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const logger = useLogger()
+  const logger = container.resolve(Logger)
   message.destroy()
   message.error(res.data.message)
   logger.error(res.data.message)
@@ -60,7 +61,7 @@ service.interceptors.response.use(async (res: AxiosResponse) => {
     res.data = JSON.parse(blobText)
   }
 
-  switch (res.data.statusCode) {
+  switch (res.data.code) {
     case 0:
       return res.data.data
     default:

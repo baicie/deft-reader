@@ -1,9 +1,10 @@
 import {
+  BookOutlined,
   DownOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
+  ProfileOutlined,
+  SettingOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Button, Dropdown, Flex, Layout, Menu, theme } from 'antd'
@@ -38,7 +39,7 @@ const DeftLayout: React.FC = () => {
     <Layout style={{ height: '100vh' }}>
       <Sider
         breakpoint="lg"
-        collapsedWidth={0}
+        // collapsedWidth={0}
         trigger={null}
         collapsible
         collapsed={collapsed}
@@ -54,7 +55,7 @@ const DeftLayout: React.FC = () => {
           items={[
             {
               key: '1',
-              icon: <UserOutlined />,
+              icon: <BookOutlined />,
               label: t('layout.menu.books'),
               onClick: () => {
                 navigate('/')
@@ -62,15 +63,15 @@ const DeftLayout: React.FC = () => {
             },
             {
               key: '2',
-              icon: <VideoCameraOutlined />,
+              icon: <SettingOutlined />,
               label: t('layout.menu.config'),
               onClick: () => {
-                navigate('/demo')
+                navigate('/config')
               },
             },
             {
               key: '3',
-              icon: <VideoCameraOutlined />,
+              icon: <ProfileOutlined />,
               label: t('layout.menu.log'),
               onClick: () => {
                 navigate('/log')

@@ -13,6 +13,9 @@ export class FileEntity {
   @Column()
   filename: string
 
+  @Column()
+  bookName: string
+
   @CreateDateColumn()
   uploadedAt: Date
 }

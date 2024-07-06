@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import styles from './demo.module.scss'
+import styles from './log.module.scss'
 
 interface Props {
   msg: string

@@ -1,12 +1,9 @@
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { useInjectable } from '../../hooks/use-di'
 import { useLogger } from '../../hooks/use-logger'
-import { Demo } from '../../store/demo'
-import DemoView from './demo-view'
+import DemoView from './config-view'
 
 export default observer(() => {
-  const demo = useInjectable(Demo)
   const logger = useLogger()
 
   const handleClick = useCallback(() => {
@@ -14,9 +11,7 @@ export default observer(() => {
     logger.info('click info')
     logger.warn('click warn')
     logger.error('click error')
+  }, [logger])
 
-    demo.doSth()
-  }, [demo, logger])
-
-  return <DemoView msg={demo.msg} onClick={handleClick} />
+  return <DemoView msg={''} onClick={handleClick} />
 })

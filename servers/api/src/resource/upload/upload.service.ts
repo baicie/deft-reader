@@ -10,9 +10,10 @@ export class UploadService {
     private readonly fileRepository: Repository<FileEntity>
   ) {}
 
-  async saveFile(filename: string): Promise<FileEntity> {
+  async saveFile(filename: string, bookName: string): Promise<FileEntity> {
     const file = new FileEntity()
     file.filename = filename
+    file.bookName = bookName
     return this.fileRepository.save(file)
   }
 

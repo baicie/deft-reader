@@ -308,7 +308,9 @@ export function createInMemoryLogger(logs: string[]): Logger {
   const logger: Logger = {
     hasWarned: false,
     hasErrorLogged: (err) => loggedErrors.has(err),
-    clearScreen: () => {},
+    clearScreen: () => {
+      return void 0
+    },
     info(msg) {
       logs.push(msg)
     },
@@ -333,7 +335,7 @@ export function createInMemoryLogger(logs: string[]): Logger {
   return logger
 }
 
-function setupConsoleWarnCollector(logs: string[]) {
+function setupConsoleWarnCollector(_logs: string[]) {
   const warn = console.warn
   console.warn = (...args) => {
     serverLogs.push(args.join(' '))

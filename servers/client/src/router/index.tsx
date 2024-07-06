@@ -5,7 +5,9 @@ import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../layout'
 
 const Books = lazy(() => import('../view/books/books-container'))
-const Demo = lazy(() => import('../view/demo/demo-container'))
+const Config = lazy(() => import('../view/config/config-container'))
+const Log = lazy(() => import('../view/log-page/log-container'))
+
 const Loading = () => <div>Loading...</div>
 
 const warpCom = (
@@ -32,8 +34,12 @@ export const routes: RouteObject[] = [
         element: warpCom(Books),
       },
       {
-        path: '/demo',
-        element: warpCom(Demo),
+        path: '/config',
+        element: warpCom(Config),
+      },
+      {
+        path: '/log',
+        element: warpCom(Log),
       },
     ],
   },

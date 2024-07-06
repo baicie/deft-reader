@@ -258,7 +258,13 @@ importers:
         specifier: ^3.4.31
         version: 3.4.31(typescript@5.5.3)
 
-  packages/test:
+  playground/basic:
+    devDependencies:
+      '@deft-reader/cli':
+        specifier: workspace:^
+        version: link:../../servers/cli
+
+  playground/test:
     dependencies:
       convert-source-map:
         specifier: ^2.0.0
@@ -272,12 +278,6 @@ importers:
       playwright-chromium:
         specifier: ^1.45.0
         version: 1.45.0
-
-  playground/basic:
-    devDependencies:
-      '@deft-reader/cli':
-        specifier: workspace:^
-        version: link:../../servers/cli
 
   servers/api:
     dependencies:

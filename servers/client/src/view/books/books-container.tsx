@@ -1,10 +1,14 @@
+import { useInjectable } from '@/hooks/use-di'
+import { TableColumnsType, TableProps, UploadProps, message } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import OverviewView from './books-view'
-import { TableColumnsType, TableProps, UploadProps, message } from 'antd'
+import { UploadStore } from '@/store/upload'
+import { useEffect } from 'react'
 
 export default observer(() => {
   const { t } = useTranslation()
+  const upload = useInjectable(UploadStore)
   const columns: TableColumnsType = []
   const data: TableProps['dataSource'] = []
 
@@ -28,6 +32,10 @@ export default observer(() => {
       console.log('Dropped files', e.dataTransfer.files)
     },
   }
+
+  useEffect(() => {
+    upload.queryUploadList()
+  }, [upload])
 
   return (
     <OverviewView

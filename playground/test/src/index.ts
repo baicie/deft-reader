@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'node:fs'
 import path from 'node:path'
 import colors from 'css-color-names'
@@ -125,7 +126,7 @@ export function readFile(filename: string): string {
 export function editFile(
   filename: string,
   replacer: (str: string) => string,
-  runInBuild: boolean = false,
+  runInBuild = false,
 ): void {
   if (isBuild && !runInBuild) return
   filename = path.resolve(testDir, filename)
@@ -157,6 +158,7 @@ export function findAssetFile(
   let files: string[]
   try {
     files = fs.readdirSync(assetsDir)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     if (e.code === 'ENOENT') {
       return ''
@@ -237,7 +239,9 @@ export async function withRetry(
     try {
       await func()
       return
-    } catch {}
+    } catch {
+      /* empty */
+    }
     await timeout(50)
   }
   await func()
@@ -256,6 +260,7 @@ export const expectWithRetry = <T>(
     {},
     {
       get(_target, key) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return async (...args: any) => {
           await withRetry(async () => {
             const actual = await getActual()
@@ -275,18 +280,18 @@ type UntilBrowserLogAfterCallback = (logs: string[]) => PromiseLike<void> | void
 
 export async function untilBrowserLogAfter(
   operation: () => any,
-  target: string | RegExp | Array<string | RegExp>,
+  target: string | RegExp | (string | RegExp)[],
   expectOrder?: boolean,
   callback?: UntilBrowserLogAfterCallback,
 ): Promise<string[]>
 export async function untilBrowserLogAfter(
   operation: () => any,
-  target: string | RegExp | Array<string | RegExp>,
+  target: string | RegExp | (string | RegExp)[],
   callback?: UntilBrowserLogAfterCallback,
 ): Promise<string[]>
 export async function untilBrowserLogAfter(
   operation: () => any,
-  target: string | RegExp | Array<string | RegExp>,
+  target: string | RegExp | (string | RegExp)[],
   arg3?: boolean | UntilBrowserLogAfterCallback,
   arg4?: UntilBrowserLogAfterCallback,
 ): Promise<string[]> {
@@ -303,7 +308,7 @@ export async function untilBrowserLogAfter(
 }
 
 async function untilBrowserLog(
-  target?: string | RegExp | Array<string | RegExp>,
+  target?: string | RegExp | (string | RegExp)[],
   expectOrder = true,
 ): Promise<string[]> {
   const { promise, resolve, reject } = promiseWithResolvers<void>()

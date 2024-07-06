@@ -3,5 +3,6 @@ export default {
   menu: {
     books: 'Books',
     config: 'Config',
+    log: 'Log',
   },
 }
