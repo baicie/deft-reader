@@ -21,7 +21,6 @@ const handleError = <T = Record<string, string>>(
   }>,
 ) => {
   // Print to console
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const logger = container.resolve(Logger)
   message.destroy()
   message.error(res.data.message)

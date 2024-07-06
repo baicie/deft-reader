@@ -223,7 +223,10 @@ export default tseslint.config(
   },
   {
     name: 'disables/test',
-    files: ['**/__tests__/**/*.?([cm])[jt]s?(x)'],
+    files: [
+      '**/__tests__/**/*.?([cm])[jt]s?(x)',
+      'playground/test/**/*.?([cm])[jt]s?(x)',
+    ],
     rules: {
       'no-console': 'off',
       'typescript-eslint/ban-ts-comment': 'off',

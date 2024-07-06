@@ -158,7 +158,6 @@ export function findAssetFile(
   let files: string[]
   try {
     files = fs.readdirSync(assetsDir)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     if (e.code === 'ENOENT') {
       return ''
@@ -260,7 +259,6 @@ export const expectWithRetry = <T>(
     {},
     {
       get(_target, key) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return async (...args: any) => {
           await withRetry(async () => {
             const actual = await getActual()

@@ -26,7 +26,6 @@ export const createServer = async (
   if (command === 'pm2') {
     pm2.connect((err) => {
       if (err) {
-        console.error(err)
         process.exit(2)
       }
       pm2.start(
@@ -44,13 +43,12 @@ export const createServer = async (
           if (err) {
             throw err
           }
-          console.log('PM2: Server started')
         },
       )
     })
   } else {
     await bootstrap(envFile).then(() => {
-      console.log('Server started')
+      return
     })
   }
 }
