@@ -1,8 +1,9 @@
-import { extname } from 'node:path'
+import * as path from 'node:path'
 import {
   Controller,
   Get,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors
 } from '@nestjs/common'
@@ -12,6 +13,11 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Result } from '@/common/result'
 import { UploadService } from './upload.service'
 import { FileUploadDto, FilesResDto, UploadResDto } from './dto/files-res.dto'
+import { createHash } from 'node:crypto'
+import { createReadStream } from 'node:fs'
+import { uploadPath } from '@/path'
+import { FileEntity } from './entities/upload.entity'
+import { UseCatchError } from '@/common/catch-error'
 
 @Controller('upload')
 @ApiTags('upload')
@@ -41,23 +47,56 @@ export class UploadController {
             Date.now() + '-' + Math.round(Math.random() * 1e9)
           const originalNameBuffer = Buffer.from(file.originalname, 'latin1')
           file.originalname = originalNameBuffer.toString('utf8')
-
-          const ext = extname(file.originalname)
+          const ext = path.extname(file.originalname)
           const filename = `${uniqueSuffix}${ext}`
           cb(null, filename)
         }
       })
     })
   )
+  @UseCatchError()
   async uploadFile(
     @UploadedFile()
     file: Express.Multer.File
   ) {
-    const savedFile = await this.fileService.saveFile(
-      file.filename,
-      file.originalname
-    )
+    const md5 = await this.calculateFileHash(file.filename)
+    const repeat = await this.fileService.getFileByMd5(md5)
+    let savedFile: FileEntity
+    if (repeat) {
+      savedFile = await this.fileService.updateFile(
+        repeat,
+        file.filename,
+        path.basename(file.originalname),
+        file.size,
+        md5
+      )
+    } else {
+      savedFile = await this.fileService.saveFile(
+        file.filename,
+        path.basename(file.originalname),
+        file.size,
+        md5
+      )
+    }
     return Result.success(savedFile.filename)
+  }
+
+  async calculateFileHash(filename: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const hash = createHash('sha256')
+      const stream = createReadStream(path.resolve(uploadPath, filename))
+      stream.on('data', (data) => hash.update(data))
+      stream.on('end', () => resolve(hash.digest('hex')))
+      stream.on('error', reject)
+    })
+  }
+
+  @Get('/md5')
+  @UseCatchError()
+  async validateFile(@Query('md5') md5: string) {
+    const file = await this.fileService.getFileByMd5(md5)
+
+    return Result.success(!file)
   }
 
   // get all files

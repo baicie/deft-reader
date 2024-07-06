@@ -43,7 +43,6 @@ describe('UploadController', () => {
       buffer: Buffer.from('test content'),
       stream: undefined // Optional, depending on your setup
     }
-
     const result = await controller.uploadFile(mockFile)
 
     expect(result.code).toBe(0)
@@ -57,5 +56,15 @@ describe('UploadController', () => {
     expect(result.code).toBe(0)
     expect(result.message).toBe('Success')
     expect(result.data).toBeInstanceOf(Array)
+  })
+
+  it('should validate file by md5', async () => {
+    const md5 = '1234567890'
+
+    const result = await controller.validateFile(md5)
+
+    expect(result.code).toBe(0)
+    expect(result.message).toBe('Success')
+    expect(result.data).toBe(true)
   })
 })

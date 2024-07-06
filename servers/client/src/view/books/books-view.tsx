@@ -31,7 +31,12 @@ const DemoView = ({
       </p>
     </Upload.Dragger>
 
-    <Table columns={columns} dataSource={data} pagination={pagination} />
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={pagination}
+      rowKey="id"
+    />
   </Flex>
 )
 export default DemoView

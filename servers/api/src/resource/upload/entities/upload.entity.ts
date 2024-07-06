@@ -2,7 +2,8 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn
+  CreateDateColumn,
+  UpdateDateColumn
 } from 'typeorm'
 
 @Entity()
@@ -18,4 +19,13 @@ export class FileEntity {
 
   @CreateDateColumn()
   uploadedAt: Date
+
+  @Column()
+  md5: string
+
+  @UpdateDateColumn()
+  updateTime: Date
+
+  @Column()
+  size: number
 }

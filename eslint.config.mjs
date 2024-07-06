@@ -89,6 +89,7 @@ export default tseslint.config(
           ignoreRestSiblings: true,
         },
       ],
+      'no-console': 'error',
     },
   },
 

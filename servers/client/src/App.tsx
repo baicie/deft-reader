@@ -1,4 +1,4 @@
-import { ConfigProvider } from 'antd'
+import { App, ConfigProvider } from 'antd'
 import enUS from 'antd/lib/locale/en_US'
 import zhCN from 'antd/lib/locale/zh_CN'
 import dayjs from 'dayjs'
@@ -50,10 +50,12 @@ export default observer(() => {
   }, [config])
 
   return (
-    <ConfigProvider locale={antdLocale}>
-      <I18nextProvider i18n={locales}>
-        <RouterProvider router={router} />
-      </I18nextProvider>
-    </ConfigProvider>
+    <App>
+      <ConfigProvider locale={antdLocale}>
+        <I18nextProvider i18n={locales}>
+          <RouterProvider router={router} />
+        </I18nextProvider>
+      </ConfigProvider>
+    </App>
   )
 })

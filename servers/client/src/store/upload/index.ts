@@ -12,7 +12,6 @@ export class UploadStore {
   public async queryUploadList() {
     const res = await getFiles()
     this.files = res
-    console.log(res)
   }
   constructor() {
     makeObservable(this)
