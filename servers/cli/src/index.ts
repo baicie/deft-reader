@@ -32,7 +32,7 @@ cli
 
 cli
   .command('pm2 [root]', 'start pm2')
-  .action(async (root: string, options: Options) => {
+  .action(async (_root: string, options: Options) => {
     try {
       await createServer(options, 'pm2')
     } catch (error) {

@@ -384,9 +384,6 @@ importers:
       supertest:
         specifier: ^7.0.0
         version: 7.0.0
-      unplugin-swc:
-        specifier: ^1.5.0
-        version: 1.5.0(@swc/core@1.6.5)(rollup@4.18.0)
       vite-tsconfig-paths:
         specifier: ^4.3.2
         version: 4.3.2(typescript@5.3.3)(vite@5.3.2(@types/node@20.14.9)(sass@1.77.6)(terser@5.31.1))
@@ -8857,17 +8854,8 @@ packages:
     peerDependencies:
       '@swc/core': ^1.2.108
 
-  unplugin-swc@1.5.0:
-    resolution: {integrity: sha512-pm6ChUa8qTJVm02cXQwiFhYIonSeYhp/58WKwz8hHYcaZxU4CsF5Z8y4kRUFQIHVC2GqVZp4Jt5mQ7UC2lgQEQ==}
-    peerDependencies:
-      '@swc/core': ^1.2.108
-
   unplugin@1.10.1:
     resolution: {integrity: sha512-d6Mhq8RJeGA8UfKCu54Um4lFA0eSaRa3XxdAJg8tIdxbu1ubW0hBCZUL7yI2uGyYCRndvbK8FLHzqy2XKfeMsg==}
-    engines: {node: '>=14.0.0'}
-
-  unplugin@1.11.0:
-    resolution: {integrity: sha512-3r7VWZ/webh0SGgJScpWl2/MRCZK5d3ZYFcNaeci/GQ7Teop7zf0Nl2pUuz7G21BwPd9pcUPOC5KmJ2L3WgC5g==}
     engines: {node: '>=14.0.0'}
 
   untildify@4.0.0:
@@ -19244,23 +19232,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  unplugin-swc@1.5.0(@swc/core@1.6.5)(rollup@4.18.0):
-    dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
-      '@swc/core': 1.6.5
-      load-tsconfig: 0.2.5
-      unplugin: 1.11.0
-    transitivePeerDependencies:
-      - rollup
-
   unplugin@1.10.1:
-    dependencies:
-      acorn: 8.12.0
-      chokidar: 3.6.0
-      webpack-sources: 3.2.3
-      webpack-virtual-modules: 0.6.2
-
-  unplugin@1.11.0:
     dependencies:
       acorn: 8.12.0
       chokidar: 3.6.0
