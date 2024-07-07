@@ -16,19 +16,15 @@ const DemoView = ({
   data,
   pagination,
   uploadProps,
+  t,
 }: Props): ReactElement => (
   <Flex vertical>
     <Upload.Dragger {...uploadProps}>
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p className="ant-upload-text">
-        Click or drag file to this area to upload
-      </p>
-      <p className="ant-upload-hint">
-        Support for a single or bulk upload. Strictly prohibited from uploading
-        company data or other banned files.
-      </p>
+      <p className="ant-upload-text">{t('upload.view.drag')}</p>
+      <p className="ant-upload-hint">{t('upload.view.hint')}</p>
     </Upload.Dragger>
 
     <Table

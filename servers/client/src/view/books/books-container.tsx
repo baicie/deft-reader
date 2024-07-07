@@ -47,15 +47,15 @@ export default observer(() => {
       render: (value: string) => dayjs(value).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
-      title: 'Actions',
+      title: t('upload.actions'),
       key: 'actions',
       render: (_, record) => (
         <Space size="middle">
           <Popconfirm
-            title="Delete the task"
-            description="Are you sure to delete this task?"
-            okText="Yes"
-            cancelText="No"
+            title={t('upload.popconfirm.title')}
+            description={t('upload.popconfirm.description')}
+            okText={t('upload.popconfirm.okText')}
+            cancelText={t('upload.popconfirm.cancelText')}
             onConfirm={() => upload.deleteFile(record.id)}
           >
             <Button danger type="text">
@@ -75,10 +75,12 @@ export default observer(() => {
     onChange(info) {
       const { status } = info.file
       if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`)
+        message.success(
+          t('upload.upload.success', { filename: info.file.name }),
+        )
         upload.queryUploadList()
       } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`)
+        message.error(t('upload.upload.failed', { filename: info.file.name }))
       }
     },
     async beforeUpload(file) {
@@ -87,19 +89,19 @@ export default observer(() => {
         const md5 = await calculateFileMD5(file)
         res = await validateFile(md5)
         if (res) {
-          logger.error(t('upload.error'))
+          logger.error(t('upload.upload.error'))
         } else {
           res = await modal.confirm({
-            title: '警告',
-            content: '这是一条警告信息。',
-            okText: '确定',
-            cancelText: '取消',
+            title: t('upload.upload.confirm.title'),
+            content: t('upload.upload.confirm.description'),
+            okText: t('upload.upload.confirm.okText'),
+            cancelText: t('upload.upload.confirm.cancelText'),
             type: 'warning',
             centered: true,
           })
         }
       } catch (_e) {
-        logger.error(t('upload.error'))
+        logger.error(t('upload.upload.error'))
         res = false
       }
       return res
