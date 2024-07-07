@@ -1,17 +1,28 @@
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { useLogger } from '../../hooks/use-logger'
-import DemoView from './config-view'
+import ConfigView from './config-view'
+import { useInjectable } from '@/hooks/use-di'
+import { Config } from '@/store/config'
 
 export default observer(() => {
-  const logger = useLogger()
+  const config = useInjectable(Config)
+
+  const handleChange = useCallback(
+    (key: string, value: string | boolean) => {
+      config.updateLocalConfg(key, value)
+    },
+    [config],
+  )
 
   const handleClick = useCallback(() => {
-    logger.debug('click debug')
-    logger.info('click info')
-    logger.warn('click warn')
-    logger.error('click error')
-  }, [logger])
+    config.updateConfig(config.config)
+  }, [config])
 
-  return <DemoView msg={''} onClick={handleClick} />
+  return (
+    <ConfigView
+      schema={config.schema}
+      onChange={handleChange}
+      onClick={handleClick}
+    />
+  )
 })

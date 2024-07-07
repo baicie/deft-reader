@@ -3,7 +3,14 @@ import { useLogger } from '@/hooks/use-logger'
 import { validateFile } from '@/service/files'
 import { UploadStore } from '@/store/upload'
 import { calculateFileMD5 } from '@/utils/md5'
-import { App, TableColumnsType, UploadProps } from 'antd'
+import {
+  App,
+  Button,
+  Popconfirm,
+  Space,
+  TableColumnsType,
+  UploadProps,
+} from 'antd'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -38,6 +45,25 @@ export default observer(() => {
       dataIndex: 'updateTime',
       key: 'updateTime',
       render: (value: string) => dayjs(value).format('YYYY-MM-DD HH:mm:ss'),
+    },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (_, record) => (
+        <Space size="middle">
+          <Popconfirm
+            title="Delete the task"
+            description="Are you sure to delete this task?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => upload.deleteFile(record.id)}
+          >
+            <Button danger type="text">
+              {t('upload.delete')}
+            </Button>
+          </Popconfirm>
+        </Space>
+      ),
     },
   ]
 

@@ -10,7 +10,8 @@ import type { MenuProps } from 'antd'
 import { Button, Dropdown, Flex, Layout, Menu, theme } from 'antd'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import styles from './index.module.scss'
 
 const { Header, Sider, Content } = Layout
 
@@ -20,6 +21,7 @@ const DeftLayout: React.FC = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken()
   const navigate = useNavigate()
+  const location = useLocation()
   const { i18n, t } = useTranslation()
 
   const items: MenuProps['items'] = [
@@ -51,10 +53,10 @@ const DeftLayout: React.FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          selectedKeys={[location.pathname]}
           items={[
             {
-              key: '1',
+              key: '/',
               icon: <BookOutlined />,
               label: t('layout.menu.books'),
               onClick: () => {
@@ -62,7 +64,7 @@ const DeftLayout: React.FC = () => {
               },
             },
             {
-              key: '2',
+              key: '/config',
               icon: <SettingOutlined />,
               label: t('layout.menu.config'),
               onClick: () => {
@@ -70,7 +72,7 @@ const DeftLayout: React.FC = () => {
               },
             },
             {
-              key: '3',
+              key: '/log',
               icon: <ProfileOutlined />,
               label: t('layout.menu.log'),
               onClick: () => {
@@ -113,8 +115,10 @@ const DeftLayout: React.FC = () => {
           </Flex>
         </Header>
         <Content
+          className={styles.content}
           style={{
             margin: '24px 16px',
+            overflow: 'auto',
             padding: 24,
             minHeight: 280,
             background: colorBgContainer,

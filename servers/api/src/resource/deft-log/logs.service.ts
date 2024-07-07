@@ -9,10 +9,13 @@ export class LogsService {
   private logDirectory = logPath
 
   async getLogs(date: string, start: number, end: number, level = 'combined') {
-    const logFilePath = path.join(this.logDirectory, `${level}-${date}.log`)
+    const logFilePath = path.resolve(this.logDirectory, `${level}-${date}.log`)
 
     if (!fs.existsSync(logFilePath)) {
-      throw new Error('Log file not found')
+      return {
+        logs: [],
+        hasNext: false
+      }
     }
 
     const logs = []
@@ -21,22 +24,34 @@ export class LogsService {
       input: fileStream,
       crlfDelay: Infinity
     })
-
+    const logPattern = /\[.*?\]/
     let currentLine = 0
+    let currentLog = ''
+
     for await (const line of rl) {
-      if (currentLine >= start && currentLine < end) {
-        logs.push(JSON.parse(line))
+      if (logPattern.test(line) && currentLog !== '') {
+        logs.push(currentLog)
+        currentLog = ''
+        continue
       }
-      if (currentLine >= end) {
+
+      currentLog += line + '\n'
+      currentLine++
+
+      if (logs.length >= end) {
         break
       }
-      currentLine++
+    }
+
+    // Push the last log if any
+    if (currentLog !== '') {
+      logs.push(currentLog.trim())
     }
 
     const hasNext = currentLine >= end
 
     return {
-      logs,
+      logs: logs.slice(start, end),
       hasNext
     }
   }

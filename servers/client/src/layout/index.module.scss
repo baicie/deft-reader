@@ -1,0 +1,18 @@
+.content {
+  &::-webkit-scrollbar {
+    width: 8px; /* 滚动条的宽度 */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: none; /* 滚动条轨道的背景色 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 6px; /* 滑块的圆角 */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #e0e0e0;
+  }
+}

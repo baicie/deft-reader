@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { FileEntity } from './entities/upload.entity'
-import { createHash } from 'node:crypto'
 
 @Injectable()
 export class UploadService {
@@ -23,17 +22,6 @@ export class UploadService {
     file.md5 = md5
     file.size = size
     return this.fileRepository.save(file)
-  }
-
-  async calculateFileHash(file: Express.Multer.File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const hash = createHash('sha256')
-      const stream = file.stream
-
-      stream.on('data', (data) => hash.update(data))
-      stream.on('end', () => resolve(hash.digest('hex')))
-      stream.on('error', reject)
-    })
   }
 
   async updateFile(
@@ -64,5 +52,13 @@ export class UploadService {
 
   getFileByMd5(md5: string) {
     return this.fileRepository.findOne({ where: { md5 } })
+  }
+
+  async getFileById(id: number): Promise<FileEntity> {
+    return this.fileRepository.findOne({ where: { id } })
+  }
+
+  async deleteFile(id: number): Promise<void> {
+    await this.fileRepository.delete(id)
   }
 }

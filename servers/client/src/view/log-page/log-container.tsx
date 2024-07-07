@@ -1,17 +1,31 @@
 import { observer } from 'mobx-react-lite'
-import { useCallback } from 'react'
-import { useLogger } from '../../hooks/use-logger'
-import DemoView from './log-view'
+import { useCallback, useEffect } from 'react'
+import LogView from './log-view'
+import { useInjectable } from '@/hooks/use-di'
+import { LogStore } from '@/store/log'
+import dayjs from 'dayjs'
+import { defaultDateFormat } from '@/utils/dayjs'
 
 export default observer(() => {
-  const logger = useLogger()
+  const logs = useInjectable(LogStore)
 
-  const handleClick = useCallback(() => {
-    logger.debug('click debug')
-    logger.info('click info')
-    logger.warn('click warn')
-    logger.error('click error')
-  }, [logger])
+  const handleClick = useCallback(
+    async (date: dayjs.Dayjs) => {
+      logs.date = date.format(defaultDateFormat)
+      await logs.queryLogs()
+    },
+    [logs],
+  )
 
-  return <DemoView msg={'demo.msg'} onClick={handleClick} />
+  useEffect(() => {
+    logs.queryLogs()
+  }, [logs])
+
+  return (
+    <LogView
+      items={logs.logs}
+      onChange={handleClick}
+      defaultValue={dayjs(logs.date, defaultDateFormat)}
+    />
+  )
 })

@@ -11,12 +11,16 @@ export interface Options {
   config: string
   env: string
   port: number
+  name: string
 }
 cli
   .option('-c, --config <file>', `[string] use specified config file`)
   .option('-e, --env <file>', `[string] use specified env file`)
   .option('-p, --port <port>', `[number] use specified port`, {
     default: 3001,
+  })
+  .option('-n, --name', `[string] use specified name`, {
+    default: 'deft-reader',
   })
 
 cli
@@ -32,9 +36,9 @@ cli
 
 cli
   .command('pm2 [root]', 'start pm2')
-  .action(async (_root: string, options: Options) => {
+  .action(async (root: string, options: Options) => {
     try {
-      await createServer(options, 'pm2')
+      await createServer(options, 'pm2', root)
     } catch (error) {
       console.error(error)
     }

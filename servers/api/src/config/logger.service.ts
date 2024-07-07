@@ -1,8 +1,8 @@
-import * as path from 'node:path'
 import { Injectable, LoggerService } from '@nestjs/common'
-import { Logger, createLogger, format, transports } from 'winston'
+import { createLogger, format, transports, Logger } from 'winston'
 import 'winston-daily-rotate-file'
-import { logPath } from '../path'
+import * as path from 'path'
+import { logPath } from '@/path'
 
 @Injectable()
 export class CustomLoggerService implements LoggerService {
@@ -19,8 +19,8 @@ export class CustomLoggerService implements LoggerService {
         format.splat(),
         format.printf(({ timestamp, level, message, ...meta }) => {
           let logMessage = `${timestamp} [${level}] ${message}`
-          if (meta.stack) {
-            logMessage += `\nStack Trace: ${meta.stack}`
+          if (meta.trace) {
+            logMessage += `\nStack Trace: ${meta.trace}`
           }
           return logMessage
         })
@@ -62,5 +62,13 @@ export class CustomLoggerService implements LoggerService {
 
   verbose(message: string) {
     this.logger.verbose(message)
+  }
+
+  requestLog(message: string) {
+    this.logger.info(`Request: ${message}`)
+  }
+
+  responseLog(message: string) {
+    this.logger.info(`Response: ${message}`)
   }
 }

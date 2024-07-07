@@ -1,7 +1,9 @@
 import * as path from 'node:path'
 import {
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Query,
   UploadedFile,
@@ -112,5 +114,25 @@ export class UploadController {
   })
   async getFiles() {
     return Result.success(await this.fileService.getAllFiles())
+  }
+
+  @Delete(':id')
+  @ApiOperation({
+    summary: 'Delete file',
+    description: 'Delete file'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful response',
+    type: UploadResDto
+  })
+  @UseCatchError()
+  async deleteFile(@Param('id') id: number) {
+    const file = await this.fileService.getFileById(id)
+    if (file) {
+      await this.fileService.deleteFile(file.id)
+      return Result.success(file.filename)
+    }
+    return Result.error('File not found')
   }
 }

@@ -1,17 +1,23 @@
 import type { ReactElement } from 'react'
 import styles from './log.module.scss'
+import { DatePicker, Empty, Flex, Timeline, TimelineProps } from 'antd'
+import dayjs from 'dayjs'
 
 interface Props {
-  msg: string
-  onClick: () => void
+  items: TimelineProps['items']
+  onChange: (date: dayjs.Dayjs) => void
+  defaultValue: dayjs.Dayjs
 }
 
-const DemoView = ({ msg, onClick }: Props): ReactElement => (
-  <div>
-    <h1 className={styles.text}>{msg}</h1>
-    <button type="button" className={styles.button} onClick={onClick}>
-      click
-    </button>
-  </div>
+const LogView = ({ items, onChange, defaultValue }: Props): ReactElement => (
+  <Flex vertical gap="middle">
+    <DatePicker
+      defaultValue={defaultValue}
+      className={styles.date}
+      onChange={onChange}
+    />
+
+    {items?.length === 0 ? <Empty /> : <Timeline items={items} />}
+  </Flex>
 )
-export default DemoView
+export default LogView
