@@ -46,7 +46,9 @@ describe('UploadService', () => {
 
     const result = await service.saveFile(
       mockFile.fieldname,
-      mockFile.originalname
+      mockFile.originalname,
+      mockFile.size,
+      'md5'
     )
     expect(result).toBeInstanceOf(FileEntity)
   })

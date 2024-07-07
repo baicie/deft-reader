@@ -91,6 +91,7 @@ export default tseslint.config(
       ],
       'no-console': 'error',
       'no-empty': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
     },
   },
 

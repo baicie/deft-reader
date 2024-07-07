@@ -5,6 +5,9 @@ import { UploadController } from '../upload.controller'
 import { UploadService } from '../upload.service'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { FileEntity } from '../entities/upload.entity'
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import { uploadPath } from '@/path'
 
 describe('UploadController', () => {
   let controller: UploadController
@@ -43,7 +46,14 @@ describe('UploadController', () => {
       buffer: Buffer.from('test content'),
       stream: undefined // Optional, depending on your setup
     }
+    const filePath = path.resolve(uploadPath, mockFile.filename)
+    console.log(filePath)
+
+    if (!fs.existsSync(filePath)) {
+      fs.copyFileSync(path.resolve(__dirname, './upload.demo.txt'), filePath)
+    }
     const result = await controller.uploadFile(mockFile)
+    console.log(result)
 
     expect(result.code).toBe(0)
     expect(result.message).toBe('Success')

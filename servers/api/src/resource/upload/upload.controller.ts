@@ -16,10 +16,9 @@ import { Result } from '@/common/result'
 import { UploadService } from './upload.service'
 import { FileUploadDto, FilesResDto, UploadResDto } from './dto/files-res.dto'
 import { createHash } from 'node:crypto'
-import { createReadStream } from 'node:fs'
-import { uploadPath } from '@/path'
 import { FileEntity } from './entities/upload.entity'
-import { UseCatchError } from '@/common/catch-error'
+import { uploadPath } from '@/path'
+import { createReadStream } from 'node:fs'
 
 @Controller('upload')
 @ApiTags('upload')
@@ -43,7 +42,7 @@ export class UploadController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './uploads',
+        destination: uploadPath,
         filename: (_, file, cb) => {
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9)
@@ -56,7 +55,6 @@ export class UploadController {
       })
     })
   )
-  @UseCatchError()
   async uploadFile(
     @UploadedFile()
     file: Express.Multer.File
@@ -92,9 +90,7 @@ export class UploadController {
       stream.on('error', reject)
     })
   }
-
   @Get('/md5')
-  @UseCatchError()
   async validateFile(@Query('md5') md5: string) {
     const file = await this.fileService.getFileByMd5(md5)
 
@@ -126,7 +122,6 @@ export class UploadController {
     description: 'Successful response',
     type: UploadResDto
   })
-  @UseCatchError()
   async deleteFile(@Param('id') id: number) {
     const file = await this.fileService.getFileById(id)
     if (file) {

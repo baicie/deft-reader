@@ -16,6 +16,8 @@ import { AuthModule } from '../auth/auth.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { InitializationService } from '@/config/initialization.service'
+import { AllExceptionsFilter } from '@/config/all-exceptions.filter'
+import { APP_FILTER } from '@nestjs/core'
 
 @Module({
   imports: [
@@ -53,7 +55,11 @@ import { InitializationService } from '@/config/initialization.service'
     AppService,
     CustomLoggerService,
     InitializationService,
-    UserRepository
+    UserRepository,
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter
+    }
   ], // 注册你的服务
   exports: [CustomLoggerService]
 })

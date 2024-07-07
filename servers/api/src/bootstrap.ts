@@ -10,6 +10,7 @@ import { CustomLoggerService } from './config/logger.service'
 import { setupSwagger } from './config/swagger.config'
 import { envPath, rootPath, uploadPath } from './path'
 import { LoggingInterceptor } from './config/logging.interceptor'
+import { AllExceptionsFilter } from './config/all-exceptions.filter'
 
 export async function bootstrap(envFile: string = envPath) {
   const envFilePath = resolve(rootPath, envFile)
@@ -33,6 +34,7 @@ export async function bootstrap(envFile: string = envPath) {
   setupSwagger(app)
   app.useLogger(logger)
   app.useGlobalInterceptors(new LoggingInterceptor(logger))
+  app.useGlobalFilters(new AllExceptionsFilter(logger))
   // eslint-disable-next-line no-constant-condition
   while (true) {
     try {

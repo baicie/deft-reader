@@ -3,7 +3,6 @@ import { Body, Controller, Get, Put } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { ConfigService } from './config.service'
 import { ConfigData, ConfigDto } from './dto/config.dto'
-import { UseCatchError } from '@/common/catch-error'
 
 @ApiTags('config')
 @Controller('config')
@@ -17,8 +16,7 @@ export class ConfigController {
     description: 'Successful response',
     type: ConfigDto
   })
-  @UseCatchError()
-  getConfig() {
+  async getConfig() {
     return Result.success<ConfigData>(this.configService.getAllEnvVars())
   }
 
@@ -29,7 +27,6 @@ export class ConfigController {
     description: 'Successful response',
     type: ConfigDto
   })
-  @UseCatchError()
   async updateConfig(@Body() data: ConfigData) {
     await this.configService.updateEnvVars(data)
     return Result.success<ConfigData>(this.configService.getAllEnvVars())

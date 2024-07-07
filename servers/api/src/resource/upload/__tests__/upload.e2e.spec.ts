@@ -13,6 +13,7 @@ describe('UploadController (e2e)', () => {
         .set('Content-Type', 'multipart/form-data')
         .attach('file', filePath)
         .expect(201)
+      console.log(response.body)
 
       expect(response.body.code).toBe(0)
       expect(response.body.message).toBe('Success')

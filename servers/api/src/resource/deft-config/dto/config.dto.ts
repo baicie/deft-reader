@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { ApiResponseDto } from '@/common/response.type'
+import { ResultDto } from '@/common/result'
 
 export interface ConfigData {
   DATABASE_PATH: string
@@ -11,7 +11,7 @@ export interface ConfigData {
   ENABLE_AUTH: boolean
 }
 
-export class ConfigDto extends ApiResponseDto {
+export class ConfigDto extends ResultDto<ConfigData> {
   @ApiProperty({
     example: {
       DATABASE_PATH: 'database.test.sqljs',
