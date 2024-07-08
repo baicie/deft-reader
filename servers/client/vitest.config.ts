@@ -1,6 +1,7 @@
 import swc from 'unplugin-swc'
 import { defineProject } from 'vitest/config'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import path from 'node:path'
 
 export default defineProject({
   test: {
@@ -13,7 +14,8 @@ export default defineProject({
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: './test/vitest-unit.ts',
+    setupFiles: '../../playground/test/setup/react.ts',
+    environment: 'jsdom',
   },
   esbuild: {
     target: 'node18',
@@ -25,4 +27,9 @@ export default defineProject({
     }),
     tsconfigPaths(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 })

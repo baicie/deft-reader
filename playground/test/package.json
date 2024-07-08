@@ -7,6 +7,16 @@
   "types": "dist/index.d.ts",
   "private": "true",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./setup/*": {
+      "import": "./dist/setup/*.mjs",
+      "require": "./dist/setup/*.cjs"
+    }
+  },
   "scripts": {
     "stub": "pnpm unbuild --stub"
   },
