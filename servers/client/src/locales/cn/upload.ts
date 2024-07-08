@@ -12,8 +12,8 @@ export default {
     cancelText: '否',
   },
   upload: {
-    success: '{filename} 上传成功',
-    failed: '{filename} 上传失败',
+    success: '{{filename}} 上传成功',
+    failed: '{{filename}} 上传失败',
     error: '上传错误',
     confirm: {
       title: '删除书籍',

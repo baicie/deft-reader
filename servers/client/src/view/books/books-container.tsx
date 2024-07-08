@@ -14,7 +14,7 @@ import {
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import OverviewView from './books-view'
+import BookView from './books-view'
 import dayjs from 'dayjs'
 
 export default observer(() => {
@@ -113,7 +113,7 @@ export default observer(() => {
   }, [upload])
 
   return (
-    <OverviewView
+    <BookView
       t={t}
       columns={columns}
       data={upload.files}

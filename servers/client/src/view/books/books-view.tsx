@@ -11,7 +11,7 @@ interface Props {
   uploadProps: UploadProps
 }
 
-const DemoView = ({
+const BookView = ({
   columns,
   data,
   pagination,
@@ -35,4 +35,4 @@ const DemoView = ({
     />
   </Flex>
 )
-export default DemoView
+export default BookView
