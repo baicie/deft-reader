@@ -43,7 +43,7 @@ const nodeConfig = defineConfig({
   input: {
     cli: path.resolve(__dirname, 'src/index.ts'),
   },
-  external: ['@deft-reader/api'],
+  external: ['@deft-reader/api', 'pm2'],
   plugins: [
     nodeResolve({ preferBuiltins: true }),
     esbuild({

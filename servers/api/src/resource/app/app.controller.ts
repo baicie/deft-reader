@@ -1,9 +1,9 @@
+import { Result } from '@/common/result'
+import { JwtAuthGuard } from '@/config/jwt-auth.guard'
 import { Controller, Get, UseGuards } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AppService } from './app.service'
-import { HelloWorldDto } from './dto/hello-world.dto'
-import { DeftResponseStatus, DeftResponseType } from '@/common/response.type'
-import { JwtAuthGuard } from '@/config/jwt-auth.guard'
+import { HelloResultDto } from './dto/hello-world.dto'
 
 @Controller('')
 @ApiTags('api')
@@ -13,31 +13,23 @@ export class AppController {
   @Get()
   @ApiOperation({ summary: 'Get hello message' })
   @ApiResponse({
-    status: DeftResponseStatus.SUCCESS,
-    description: 'Success',
-    type: HelloWorldDto
+    status: 200,
+    description: 'Successful response',
+    type: HelloResultDto
   })
-  getHello(): DeftResponseType<string> {
-    return {
-      data: this.appService.getHello(),
-      message: 'User retrieved successfully',
-      statusCode: DeftResponseStatus.SUCCESS
-    }
+  getHello() {
+    return Result.success<string>(this.appService.getHello())
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   @ApiOperation({ summary: 'Get user profile' })
   @ApiResponse({
-    status: DeftResponseStatus.SUCCESS,
-    description: 'Success',
-    type: HelloWorldDto
+    status: 200,
+    description: 'Successful response',
+    type: HelloResultDto
   })
-  getProfile(): DeftResponseType<string> {
-    return {
-      data: this.appService.getProfile(),
-      message: 'User retrieved successfully',
-      statusCode: DeftResponseStatus.SUCCESS
-    }
+  getProfile() {
+    return Result.success<string>(this.appService.getProfile())
   }
 }

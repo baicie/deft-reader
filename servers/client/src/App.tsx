@@ -1,10 +1,8 @@
-import { ConfigProvider } from 'antd'
+import { App, ConfigProvider } from 'antd'
 import enUS from 'antd/lib/locale/en_US'
-import frFR from 'antd/lib/locale/fr_FR'
 import zhCN from 'antd/lib/locale/zh_CN'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en'
-import 'dayjs/locale/fr'
 import 'dayjs/locale/zh-cn'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
@@ -24,10 +22,6 @@ export default observer(() => {
     const handleLanguageChange = (lng: string) => {
       // 同步 antd 语言
       switch (lng) {
-        case 'fr':
-          setAntdLocale(frFR)
-          dayjs.locale(lng)
-          break
         case 'en':
           setAntdLocale(enUS)
           dayjs.locale(lng)
@@ -52,14 +46,16 @@ export default observer(() => {
   }, [i18n])
 
   useEffect(() => {
-    void config.queryConfig()
+    config.queryConfig()
   }, [config])
 
   return (
-    <ConfigProvider locale={antdLocale}>
-      <I18nextProvider i18n={locales}>
-        <RouterProvider router={router} />
-      </I18nextProvider>
-    </ConfigProvider>
+    <App>
+      <ConfigProvider locale={antdLocale}>
+        <I18nextProvider i18n={locales}>
+          <RouterProvider router={router} />
+        </I18nextProvider>
+      </ConfigProvider>
+    </App>
   )
 })

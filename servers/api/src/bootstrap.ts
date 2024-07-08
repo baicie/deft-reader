@@ -9,6 +9,8 @@ import { setupStaticFiles } from './config/static-files.config'
 import { CustomLoggerService } from './config/logger.service'
 import { setupSwagger } from './config/swagger.config'
 import { envPath, rootPath, uploadPath } from './path'
+import { LoggingInterceptor } from './config/logging.interceptor'
+import { AllExceptionsFilter } from './config/all-exceptions.filter'
 
 export async function bootstrap(envFile: string = envPath) {
   const envFilePath = resolve(rootPath, envFile)
@@ -17,6 +19,7 @@ export async function bootstrap(envFile: string = envPath) {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const configService = app.get(ConfigService)
   let port = configService.get<number>('SERVER_PORT') || 3000
+  configService.set('ENV_FILE_PATH', envFilePath)
 
   app.setGlobalPrefix('api')
   // has web static
@@ -30,7 +33,8 @@ export async function bootstrap(envFile: string = envPath) {
   // has swagger
   setupSwagger(app)
   app.useLogger(logger)
-
+  app.useGlobalInterceptors(new LoggingInterceptor(logger))
+  app.useGlobalFilters(new AllExceptionsFilter(logger))
   // eslint-disable-next-line no-constant-condition
   while (true) {
     try {

@@ -1,18 +1,17 @@
 /* eslint-disable no-console */
-import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { bootstrap } from '@deft-reader/api'
 import { cac } from 'cac'
+import { fileURLToPath } from 'node:url'
 import { VERSION } from './constants'
-
+import { createServer } from './server'
 const cli = cac('deft')
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-interface Options {
+export const cliPath = fileURLToPath(new URL('.', import.meta.url))
+
+export interface Options {
   config: string
   env: string
   port: number
+  name: string
 }
 cli
   .option('-c, --config <file>', `[string] use specified config file`)
@@ -20,28 +19,33 @@ cli
   .option('-p, --port <port>', `[number] use specified port`, {
     default: 3001,
   })
+  .option('-n, --name', `[string] use specified name`, {
+    default: 'deft-reader',
+  })
+
+cli
   .command('[root]', 'start dev server') // default command
   .alias('start')
   .action(async (_, options: Options) => {
     try {
-      const envStr = `
-        DATABASE_PATH=${path.resolve(__dirname, 'database.sqljs')}
-        DATABASE_PORT=${options.port.toString()}
-      `
+      await createServer(options)
+    } catch (error) {
+      console.error(error)
+    }
+  })
 
-      const envFile = path.resolve(__dirname, '.env')
-      fs.writeFileSync(envFile, envStr)
-
-      await bootstrap(envFile).then(() => {
-        console.log('Server started')
-      })
+cli
+  .command('pm2 [root]', 'start pm2')
+  .action(async (root: string, options: Options) => {
+    try {
+      await createServer(options, 'pm2', root)
     } catch (error) {
       console.error(error)
     }
   })
 
 cli.command('config').action(() => {
-  console.log(__dirname)
+  console.log(cliPath)
 })
 
 cli.help()

@@ -8,6 +8,5 @@ dist/
 **/dist/
 uploads
 **/uploads
-log
-**/log
 .vscode
+coverage

@@ -13,14 +13,13 @@ export default defineProject({
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: '../../playground/setup.ts'
+    setupFiles: './test/vitest-unit.ts'
   },
   esbuild: {
     target: 'node18'
   },
   publicDir: false,
   plugins: [
-    // @ts-expect-error - swc.vite is not typed
     swc.vite({
       module: { type: 'es6' }
     }),

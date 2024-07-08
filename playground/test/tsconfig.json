@@ -1,0 +1,13 @@
+{
+  "include": ["src"],
+  "exclude": ["dist"],
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["@types/node"],
+    "lib": ["DOM"]
+  }
+}

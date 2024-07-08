@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { LogsService } from './logs.service'
+import { Result } from '@/common/result'
 
 @Controller('logs')
 @ApiTags('logs')
@@ -15,8 +16,10 @@ export class LogsController {
     @Query('level') level: string
   ) {
     const startNum = parseInt(start, 10) || 0
-    const endNum = parseInt(end, 10) || 100
+    const endNum = parseInt(end, 10) || Number.MAX_SAFE_INTEGER
 
-    return this.logsService.getLogs(date, startNum, endNum, level)
+    return Result.success(
+      await this.logsService.getLogs(date, startNum, endNum, level)
+    )
   }
 }

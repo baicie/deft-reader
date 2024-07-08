@@ -2,11 +2,8 @@ import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import cookies from 'js-cookie'
 import { message } from 'antd'
-import { useLogger } from '../hooks/use-logger'
-// import router from '@/router'
-// import utils from '@/utils'
-// import isJson from '@/utils/json'
-// import { useTokenStore } from '@/store/token'
+import { Logger } from './logger/logger'
+import { container } from 'tsyringe'
 
 /**
  * @description Log and display errors
@@ -20,8 +17,7 @@ const handleError = <T = Record<string, string>>(
   }>,
 ) => {
   // Print to console
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const logger = useLogger()
+  const logger = container.resolve(Logger)
   message.destroy()
   message.error(res.data.message)
   logger.error(res.data.message)
@@ -39,12 +35,6 @@ const err = (err: AxiosError): Promise<AxiosError | AxiosResponse> => {
 }
 
 service.interceptors.request.use((config) => {
-  //   const userStore = useUserStore()
-  //   const tokenStore = useTokenStore()
-  //   config.headers && (config.headers.sessionId = userStore.getSessionId)
-  //   config.headers &&
-  //     tokenStore.getToken &&
-  //     (config.headers.token = tokenStore.getToken)
   const language = cookies.get('language')
   config.headers = config.headers || {}
   if (language) config.headers.language = language
@@ -54,15 +44,23 @@ service.interceptors.request.use((config) => {
 
 // The response to intercept
 service.interceptors.response.use(async (res: AxiosResponse) => {
+  const logger = container.resolve(Logger)
+
   if (res.data instanceof Blob) {
     const blobText = await res.data.text()
     if (JSON.parse(blobText).code === void 0) return res.data
     res.data = JSON.parse(blobText)
   }
 
-  switch (res.data.statusCode) {
+  switch (res.data.code) {
     case 0:
       return res.data.data
+    case 10500:
+    case 10501:
+      message.destroy()
+      message.error(res.data.message)
+      logger.error(res.data.message)
+      break
     default:
       handleError(res)
       throw new Error()

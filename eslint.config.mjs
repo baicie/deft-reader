@@ -44,6 +44,8 @@ export default tseslint.config(
       '**/vitest.config.ts',
       '**/vitest.config.e2e.ts',
       'scripts',
+      'coverage',
+      'packages',
     ],
   },
 
@@ -73,6 +75,23 @@ export default tseslint.config(
         tsconfigRootDir: __dirname,
         warnOnUnsupportedTypeScriptVersion: false,
       },
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      'no-console': 'error',
+      'no-empty': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
     },
   },
 
@@ -167,18 +186,6 @@ export default tseslint.config(
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          args: 'all',
-          argsIgnorePattern: '^_',
-          caughtErrors: 'all',
-          caughtErrorsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
       'import-x/no-nodejs-modules': [
         'error',
         {
@@ -218,7 +225,10 @@ export default tseslint.config(
   },
   {
     name: 'disables/test',
-    files: ['**/__tests__/**/*.?([cm])[jt]s?(x)'],
+    files: [
+      '**/__tests__/**/*.?([cm])[jt]s?(x)',
+      'playground/test/**/*.?([cm])[jt]s?(x)',
+    ],
     rules: {
       'no-console': 'off',
       'typescript-eslint/ban-ts-comment': 'off',

@@ -1,8 +1,8 @@
-import { Controller, Get } from '@nestjs/common'
+import { Result } from '@/common/result'
+import { Body, Controller, Get, Put } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { ConfigService } from './config.service'
 import { ConfigData, ConfigDto } from './dto/config.dto'
-import { DeftResponseStatus, DeftResponseType } from '@/common/response.type'
 
 @ApiTags('config')
 @Controller('config')
@@ -12,15 +12,23 @@ export class ConfigController {
   @Get()
   @ApiOperation({ summary: 'Get config' })
   @ApiResponse({
-    status: DeftResponseStatus.SUCCESS,
-    description: 'Success',
+    status: 200,
+    description: 'Successful response',
     type: ConfigDto
   })
-  getConfig(): DeftResponseType<ConfigData> {
-    return {
-      data: this.configService.getAllEnvVars(),
-      message: 'Config retrieved successfully',
-      statusCode: DeftResponseStatus.SUCCESS
-    }
+  async getConfig() {
+    return Result.success<ConfigData>(this.configService.getAllEnvVars())
+  }
+
+  @Put()
+  @ApiOperation({ summary: 'Update config' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful response',
+    type: ConfigDto
+  })
+  async updateConfig(@Body() data: ConfigData) {
+    await this.configService.updateEnvVars(data)
+    return Result.success<ConfigData>(this.configService.getAllEnvVars())
   }
 }

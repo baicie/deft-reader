@@ -1,4 +1,3 @@
-import path from 'node:path'
 import swc from 'unplugin-swc'
 import { defineConfig, defineWorkspace } from 'vitest/config'
 
@@ -9,7 +8,6 @@ const commonConfig = defineConfig({
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: path.resolve(__dirname, './playground/setup.ts'),
     deps: {
       interopDefault: true,
     },
@@ -28,6 +26,7 @@ const commonConfig = defineConfig({
 // defineWorkspace 会提供一个很好的类型提示开发体验
 export default defineWorkspace([
   'servers/api/vitest.config.e2e.ts',
+  'servers/client/vitest.config.e2e.ts',
   {
     root: 'servers/cli',
     ...commonConfig,
