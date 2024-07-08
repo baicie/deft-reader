@@ -1,1 +1,3 @@
-export default {}
+export default {
+  save: '保存',
+}
