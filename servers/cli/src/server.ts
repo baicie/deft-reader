@@ -2,7 +2,7 @@
 import path from 'node:path'
 import { Options, cliPath } from './index'
 import fs from 'node:fs'
-import { bootstrap } from '@deft-reader/api'
+import { createApp } from '@deft-reader/api'
 import pm2 from 'pm2'
 
 export const createServer = async (
@@ -78,8 +78,9 @@ export const createServer = async (
       }
     })
   } else {
-    await bootstrap(envFile).then(() => {
-      console.log('Server started')
+    const app = await createApp(envFile)
+    app.listen(options.port, () => {
+      console.log(`Server is running on http://localhost:${options.port}`)
     })
   }
 }

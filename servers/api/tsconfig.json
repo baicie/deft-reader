@@ -22,6 +22,6 @@
       "~utils": ["./test/test-utils.ts"]
     }
   },
-  "include": ["src", "./bootstrap.d.ts", "test"],
+  "include": ["src", "index.d.ts", "test"],
   "exclude": ["static"]
 }

@@ -1,22 +1,33 @@
 import 'reflect-metadata'
 import { afterAll, beforeAll, vi } from 'vitest'
-import { server } from './server'
+import { serve } from './server'
+import type { DeftApp } from '@deft-reader/api'
 
-beforeAll(() => server.listen())
-afterEach(() => server.resetHandlers())
-afterAll(() => server.close())
+let app: DeftApp | undefined
+const port = 4001
 
-// 模拟 window.matchMedia
+beforeAll(() => {
+  serve().then((_app) => {
+    app = _app
+    app?.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`)
+    })
+  })
+})
+
+afterAll(() => app?.close())
+
+// mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: (query: string) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // 旧的 API
-    removeListener: vi.fn(), // 旧的 API
-    addEventListener: vi.fn(), // 新的 API
-    removeEventListener: vi.fn(), // 新的 API
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
   }),
 })
