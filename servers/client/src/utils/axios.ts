@@ -47,9 +47,20 @@ service.interceptors.response.use(async (res: AxiosResponse) => {
   const logger = container.resolve(Logger)
 
   if (res.data instanceof Blob) {
-    const blobText = await res.data.text()
-    if (JSON.parse(blobText).code === void 0) return res.data
-    res.data = JSON.parse(blobText)
+    const reader = new FileReader()
+    return new Promise((resolve, reject) => {
+      reader.onload = () => {
+        try {
+          const blobText = reader.result as string
+          const parsedData = JSON.parse(blobText)
+          resolve(parsedData)
+        } catch (error) {
+          reject(error)
+        }
+      }
+      reader.onerror = reject
+      reader.readAsText(res.data)
+    })
   }
 
   switch (res.data.code) {

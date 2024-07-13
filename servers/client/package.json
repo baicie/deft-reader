@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint --cache .",
     "preview": "vite preview",
-    "test": "vitest -c vitest.config.ts",
+    "test": "vitest run -c vitest.config.ts",
     "test-e2e": "vitest -c vitest.config.e2e.ts"
   },
   "dependencies": {

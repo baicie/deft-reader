@@ -1,109 +1,97 @@
-import { describe, it, expect, vi, beforeEach, afterEach, Mock } from 'vitest'
-import axiosOriginal, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { describe, it, expect, beforeEach, afterEach, vi, Mock } from 'vitest'
+import MockAdapter from 'axios-mock-adapter'
 import cookies from 'js-cookie'
 import { message } from 'antd'
 import { container } from 'tsyringe'
+import { axios as axiosInstance } from '../axios' // 调整路径
+import { Logger } from 'vite'
 
+// Mock dependencies
 vi.mock('js-cookie')
 vi.mock('antd')
-vi.mock('tsyringe')
+vi.mock('./logger/logger')
+vi.mock('tsyringe', () => ({
+  container: {
+    resolve: vi.fn(),
+  },
+}))
 
-// 创建 axios 实例
-const instance = axiosOriginal.create()
-
-instance.interceptors.request.use = vi.fn()
-
-describe('Axios Service', () => {
-  let logger: any
+describe('Axios Configuration', () => {
+  let mock: MockAdapter
+  let logger: Logger
 
   beforeEach(() => {
-    ;(axiosOriginal.create as Mock).mockReturnValue(instance)
-    logger = { error: vi.fn() }
-    container.resolve = vi.fn().mockReturnValue(logger)
+    mock = new MockAdapter(axiosInstance)
+    logger = {
+      error: vi.fn(),
+    } as unknown as Logger
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    container.resolve.mockReturnValue(logger)
+    vi.clearAllMocks()
   })
 
   afterEach(() => {
-    vi.resetAllMocks()
+    mock.reset()
   })
 
-  it('should set language header from cookies', async () => {
+  it('should set language header if cookie exists', async () => {
     ;(cookies.get as Mock).mockReturnValue('en')
-    const config: AxiosRequestConfig = { headers: {} }
-    console.log('instance', instance.interceptors.request.use)
 
-    const requestInterceptor = (config: AxiosRequestConfig) => {
-      const language = cookies.get('language')
-      if (language) {
-        config.headers!['language'] = language
-      }
-      return config
-    }
+    mock.onGet('/test').reply(200, { code: 0, data: {} })
 
-    instance.interceptors.request.use.mockImplementationOnce(requestInterceptor)
+    await axiosInstance.get('/test')
 
-    const interceptor = instance.interceptors.request.use.mock.calls[0][0]
-    await interceptor(config)
-
-    // 断言请求头中包含语言信息
-    expect(config.headers['language']).toBe('en')
+    expect(mock.history.get[0].headers!['language']).toBe('en')
   })
 
-  it('should handle Blob response and parse JSON correctly', async () => {
-    const res: AxiosResponse = {
-      data: new Blob([JSON.stringify({ code: 0, data: 'test' })], {
-        type: 'application/json',
-      }),
-      status: 200,
-      statusText: 'OK',
-      headers: {},
-      config: {},
-    }
+  it('should not set language header if cookie does not exist', async () => {
+    ;(cookies.get as Mock).mockReturnValue(undefined)
 
-    const responseInterceptor =
-      instance.interceptors.response.use.mock.calls[0][0]
-    const result = await responseInterceptor(res)
+    mock.onGet('/test').reply(200, { code: 0, data: {} })
 
-    expect(result).toBe('test')
+    await axiosInstance.get('/test')
+
+    expect(mock.history.get[0].headers!['language']).toBeUndefined()
   })
 
-  it('should call handleError for other error codes', async () => {
-    const res: AxiosResponse = {
-      data: { code: 10500, message: 'Error message', data: {} },
-      status: 200,
-      statusText: 'OK',
-      headers: {},
-      config: {},
-    }
+  it('should handle successful response', async () => {
+    mock.onGet('/test').reply(200, { code: 0, data: { key: 'value' } })
 
-    const responseInterceptor =
-      instance.interceptors.response.use.mock.calls[0][0]
+    const response = await axiosInstance.get('/test')
+
+    expect(response).toEqual({ key: 'value' })
+  })
+
+  it('should handle known error codes', async () => {
+    mock.onGet('/test').reply(200, { code: 10500, message: 'Error message' })
+
     try {
-      await responseInterceptor(res)
+      await axiosInstance.get('/test')
     } catch (_) {
       expect(message.error).toHaveBeenCalledWith('Error message')
       expect(logger.error).toHaveBeenCalledWith('Error message')
     }
   })
 
-  it('should reject on request error', async () => {
-    const error = new Error('Request error')
-    const requestInterceptor =
-      instance.interceptors.request.use.mock.calls[0][1]
+  it('should handle unknown error codes', async () => {
+    mock.onGet('/test').reply(200, { code: 9999, message: 'Unknown error' })
+
     try {
-      await requestInterceptor(error)
-    } catch (e) {
-      expect(e).toBe(error)
+      await axiosInstance.get('/test')
+    } catch (_) {
+      expect(message.error).toHaveBeenCalledWith('Unknown error')
+      expect(logger.error).toHaveBeenCalledWith('Unknown error')
     }
   })
 
-  it('should reject on response error', async () => {
-    const error = new Error('Response error')
-    const responseInterceptor =
-      instance.interceptors.response.use.mock.calls[0][1]
-    try {
-      await responseInterceptor(error)
-    } catch (e) {
-      expect(e).toBe(error)
-    }
+  it('should handle Blob response', async () => {
+    const blob = new Blob([JSON.stringify({ key: 'value' })], {
+      type: 'application/json',
+    })
+    mock.onGet('/test').reply(200, blob)
+
+    const response = await axiosInstance.get('/test')
+    expect(response).toEqual({ key: 'value' })
   })
 })
