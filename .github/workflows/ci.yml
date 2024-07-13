@@ -14,9 +14,11 @@ permissions: {}
 on:
   push:
     branches:
-      - main
       - feat/*
+      - fix/*
   pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 concurrency:
