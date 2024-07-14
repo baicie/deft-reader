@@ -1,4 +1,3 @@
-import react from '@vitejs/plugin-react-swc'
 import path from 'node:path'
 import swc from 'unplugin-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -15,7 +14,10 @@ export default defineProject({
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: '../../playground/test/setup/setup-react.ts',
+    setupFiles: [
+      '../../playground/test/setup/setup-react.ts',
+      './src/__tests__/setup.ts',
+    ],
     environment: 'jsdom',
   },
   esbuild: {
@@ -32,9 +34,6 @@ export default defineProject({
           },
         },
       },
-    }),
-    react({
-      tsDecorators: true,
     }),
     tsconfigPaths(),
   ],

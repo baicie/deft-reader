@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { LogLevel } from '../../logger/log-level'
-import { ConsoleLogTransport } from '../../logger/console-transport'
 import dayjs from 'dayjs'
+import { ConsoleLogTransport } from '@/utils/logger/console-transport'
+import { LogLevel } from '@/utils/logger/log-level'
 
 describe('ConsoleLogTransport', () => {
   let consoleSpy: any

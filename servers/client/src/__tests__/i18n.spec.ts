@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest'
-import i18n from '../index'
+import i18n from '@/locales'
 
 describe('i18n', () => {
   beforeAll(() => {

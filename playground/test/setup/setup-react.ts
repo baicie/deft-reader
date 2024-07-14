@@ -22,8 +22,9 @@ Object.defineProperty(window, 'matchMedia', {
   }),
 })
 
-declare module 'vitest' {
-  export interface ProvidedContext {
-    wsEndpoint: string
-  }
-}
+Object.defineProperty(window, 'getComputedStyle', {
+  writable: true,
+  value: (_: Element) => ({
+    getPropertyValue: vi.fn(),
+  }),
+})

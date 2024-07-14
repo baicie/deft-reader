@@ -9,10 +9,11 @@ export default defineProject({
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: '../../playground/test/setup/react.ts',
-    deps: {
-      interopDefault: true,
-    },
+    setupFiles: [
+      '../../playground/test/setup/setup-react.ts',
+      './src/__tests__/setup.ts',
+    ],
+    globalSetup: '../../playground/test/setup/global-react.ts',
     environment: 'jsdom',
   },
   esbuild: {

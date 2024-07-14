@@ -19,7 +19,7 @@ const BookView = ({
   t,
 }: Props): ReactElement => (
   <Flex vertical>
-    <Upload.Dragger {...uploadProps}>
+    <Upload.Dragger {...uploadProps} data-testid="toggle-upload-button">
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>

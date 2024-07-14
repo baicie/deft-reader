@@ -11,6 +11,9 @@ importers:
       '@antfu/eslint-config':
         specifier: 2.22.0
         version: 2.22.0(@vue/compiler-sfc@3.4.31)(eslint-plugin-react-hooks@4.6.2(eslint@8.57.0))(eslint-plugin-react-refresh@0.4.8(eslint@8.57.0))(eslint@8.57.0)(typescript@5.5.3)(vitest@2.0.2(@types/node@20.14.10)(jsdom@24.1.0)(sass@1.77.8)(terser@5.31.2))
+      '@deft-reader/test':
+        specifier: workspace:^
+        version: link:playground/test
       '@eslint/compat':
         specifier: ^1.1.1
         version: 1.1.1

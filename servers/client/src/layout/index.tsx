@@ -96,6 +96,7 @@ const DeftLayout: React.FC = () => {
                 width: 64,
                 height: 64,
               }}
+              data-testid="toggle-sidebar-button"
             />
 
             <Dropdown menu={{ items }}>
@@ -108,6 +109,7 @@ const DeftLayout: React.FC = () => {
                 }}
                 role="button"
                 tabIndex={0}
+                data-testid="toggle-i18n-button"
               >
                 {t('layout.language')} <DownOutlined />
               </div>

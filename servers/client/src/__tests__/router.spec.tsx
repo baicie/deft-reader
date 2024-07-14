@@ -1,15 +1,15 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
-import { routes } from '../index'
+import { routes } from '@/router'
 
-vi.mock('../../view/books/books-container', () => ({
+vi.mock('../view/books/books-container', () => ({
   default: () => <div>Books Component</div>,
 }))
-vi.mock('../../view/config/config-container', () => ({
+vi.mock('../view/config/config-container', () => ({
   default: () => <div>Config Component</div>,
 }))
-vi.mock('../../view/log-page/log-container', () => ({
+vi.mock('../view/log-page/log-container', () => ({
   default: () => <div>Log Component</div>,
 }))
 

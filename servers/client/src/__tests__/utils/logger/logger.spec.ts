@@ -1,13 +1,13 @@
 import { describe, it, expect, vi } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { container } from 'tsyringe'
-import { LogLevel } from '../../logger/log-level'
-import { Logger } from '../../logger/logger'
-import { LogTransport } from '../../logger/transport'
 import { useLogger } from '../../../hooks/use-logger'
+import { LogLevel } from '@/utils/logger/log-level'
+import { Logger } from '@/utils/logger/logger'
+import { LogTransport } from '@/utils/logger/transport'
 
 class MockTransport implements LogTransport {
-  maxLevel: LogLevel
+  maxLevel = LogLevel.Info
   log = vi.fn()
 }
 

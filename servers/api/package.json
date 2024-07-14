@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "nest start --watch",
     "build": "nest build",
+    "stub": "pnpm run build",
     "test-unit": "vitest run",
     "test-e2e": "vitest run -c vitest.config.e2e.ts"
   },
@@ -77,5 +78,12 @@
     ".env",
     "bootstrap.d.ts",
     "locales"
-  ]
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/app.js",
+      "require": "./dist/app.js",
+      "types": "./index.d.ts"
+    }
+  }
 }

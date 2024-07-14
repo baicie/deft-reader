@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { calculateFileMD5 } from '../md5'
+import { calculateFileMD5 } from '@/utils/md5'
 
 // Mock the `File` and `Blob` objects
 class MockFile extends Blob {

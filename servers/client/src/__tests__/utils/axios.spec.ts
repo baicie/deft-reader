@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter'
 import cookies from 'js-cookie'
 import { message } from 'antd'
 import { container } from 'tsyringe'
-import { axios as axiosInstance } from '../axios' // 调整路径
+import { axios as axiosInstance } from '@/utils/axios' // 调整路径
 import { Logger } from 'vite'
 
 // Mock dependencies

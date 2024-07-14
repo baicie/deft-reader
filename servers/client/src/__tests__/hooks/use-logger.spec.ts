@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { container, injectable } from 'tsyringe'
 import { Logger } from '../../utils/logger/logger'
-import { useInjectable } from '../use-di'
+import { useInjectable } from '../../hooks/use-di'
 import { LogLevel } from '../../utils/logger/log-level'
 
 @injectable()

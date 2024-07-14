@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { container, injectable } from 'tsyringe'
-import { useInjectable } from '../use-di'
+import { useInjectable } from '../../hooks/use-di'
 // 创建一个可注入的服务类
 @injectable()
 class MyService {
