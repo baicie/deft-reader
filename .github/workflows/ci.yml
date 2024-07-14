@@ -16,8 +16,7 @@ on:
     branches:
       - main
       - feat/*
-  pull_request:
-  workflow_dispatch:
+      - fix/*
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}

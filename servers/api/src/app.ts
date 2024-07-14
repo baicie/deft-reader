@@ -12,13 +12,12 @@ import { envPath, rootPath, uploadPath } from './path'
 import { LoggingInterceptor } from './config/logging.interceptor'
 import { AllExceptionsFilter } from './config/all-exceptions.filter'
 
-export async function bootstrap(envFile: string = envPath) {
+export async function createApp(envFile: string = envPath) {
   const envFilePath = resolve(rootPath, envFile)
   config({ path: envFilePath })
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const configService = app.get(ConfigService)
-  let port = configService.get<number>('SERVER_PORT') || 3000
   configService.set('ENV_FILE_PATH', envFilePath)
 
   app.setGlobalPrefix('api')
@@ -35,20 +34,5 @@ export async function bootstrap(envFile: string = envPath) {
   app.useLogger(logger)
   app.useGlobalInterceptors(new LoggingInterceptor(logger))
   app.useGlobalFilters(new AllExceptionsFilter(logger))
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    try {
-      await app.listen(port)
-      console.log(`Server is running on http://localhost:${port.toString()}`)
-      break
-    } catch (error) {
-      if (error.code === 'EADDRINUSE') {
-        console.log(`Port ${port} is already in use, trying ${port + 1}`)
-        port++
-      } else {
-        console.error('Error occurred while starting the server:', error)
-        process.exit(1)
-      }
-    }
-  }
+  return app
 }

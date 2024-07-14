@@ -1,5 +1,5 @@
 import type { LazyExoticComponent } from 'react'
-import { Suspense, lazy } from 'react'
+import React, { Suspense, lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../layout'
@@ -12,7 +12,7 @@ const Loading = () => <div>Loading...</div>
 
 const warpCom = (
   Com: LazyExoticComponent<
-    (() => JSX.Element) & {
+    (() => React.ReactNode) & {
       displayName: string
     }
   >,

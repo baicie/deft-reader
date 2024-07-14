@@ -4,12 +4,13 @@
   "description": "",
   "author": "",
   "license": "MIT",
-  "main": "dist/bootstrap.js",
-  "module": "dist/bootstrap.js",
-  "types": "bootstrap.d.ts",
+  "main": "dist/app.js",
+  "module": "dist/app.js",
+  "types": "index.d.ts",
   "scripts": {
     "dev": "nest start --watch",
     "build": "nest build",
+    "stub": "pnpm run build",
     "test-unit": "vitest run",
     "test-e2e": "vitest run -c vitest.config.e2e.ts"
   },
@@ -38,7 +39,7 @@
     "sql.js": "^1.10.3",
     "swagger-ui-express": "^5.0.1",
     "typeorm": "^0.3.20",
-    "winston": "^3.13.0",
+    "winston": "^3.13.1",
     "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
@@ -77,5 +78,12 @@
     ".env",
     "bootstrap.d.ts",
     "locales"
-  ]
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/app.js",
+      "require": "./dist/app.js",
+      "types": "./index.d.ts"
+    }
+  }
 }

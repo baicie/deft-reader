@@ -32,7 +32,7 @@ describe('DeftConfigModule (e2e)', () => {
       .expect((response) => {
         const data = response.body
         expect(data.data).toStrictEqual({
-          DATABASE_PATH: 'database.test.sqljs',
+          DATABASE_PATH: 'database.sqljs',
           ENABLE_AUTH: true,
           ENABLE_LOG: true,
           ENABLE_SWAGGER: true,

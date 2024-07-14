@@ -7,6 +7,16 @@
   "types": "dist/index.d.ts",
   "private": "true",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./setup/*": {
+      "import": "./dist/setup/*.mjs",
+      "require": "./dist/setup/*.cjs"
+    }
+  },
   "scripts": {
     "stub": "pnpm unbuild --stub"
   },
@@ -14,9 +24,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@deft-reader/api": "workspace:^",
     "convert-source-map": "^2.0.0",
     "css-color-names": "^1.0.1",
     "execa": "^9.3.0",
-    "playwright-chromium": "^1.45.1"
+    "playwright-chromium": "^1.45.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

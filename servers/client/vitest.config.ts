@@ -1,19 +1,24 @@
+import path from 'node:path'
 import swc from 'unplugin-swc'
-import { defineProject } from 'vitest/config'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { defineProject } from 'vitest/config'
 
 export default defineProject({
   test: {
-    include: ['**/__tests__/**/*.spec.[tj]s'],
+    include: ['**/__tests__/**/*.spec.{js,jsx,ts,tsx}'],
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
-      '**/__tests__/**/*.e2e.spec.[tj]s',
+      '**/__tests__/**/*.e2e.spec.{js,jsx,ts,tsx}',
     ],
     testTimeout: 20000,
     isolate: false,
     globals: true,
-    setupFiles: './test/vitest-unit.ts',
+    setupFiles: [
+      '../../playground/test/setup/setup-react.ts',
+      './src/__tests__/setup.ts',
+    ],
+    environment: 'jsdom',
   },
   esbuild: {
     target: 'node18',
@@ -22,7 +27,19 @@ export default defineProject({
   plugins: [
     swc.vite({
       module: { type: 'es6' },
+      jsc: {
+        transform: {
+          react: {
+            runtime: 'automatic',
+          },
+        },
+      },
     }),
     tsconfigPaths(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 })
