@@ -14,11 +14,9 @@ permissions: {}
 on:
   push:
     branches:
+      - main
       - feat/*
       - fix/*
-  pull_request:
-    branches:
-      - "*"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
