@@ -69,6 +69,11 @@ jobs:
         if: steps.changed-files.outputs.only_changed != 'true'
         run: pnpm install
 
+      - name: Install Playwright
+        if: steps.changed-files.outputs.only_changed != 'true'
+        run: |
+          pnpm exec playwright install
+
       - name: Build
         if: steps.changed-files.outputs.only_changed != 'true'
         run: pnpm run build

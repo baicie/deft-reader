@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { calculateFileMD5 } from '@/utils/md5'
-
+import crypto from 'node:crypto'
 // Mock the `File` and `Blob` objects
 class MockFile extends Blob {
   constructor(chunks: BlobPart[], name: string, options?: BlobPropertyBag) {
