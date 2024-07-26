@@ -7,6 +7,7 @@ import request from 'supertest'
 import { typeOrmConfig } from '../../../config/typeorm.config'
 import { testEnvPath } from '../../../path'
 import { UsersModule } from '../users.module'
+import { afterAll, beforeAll } from 'vitest'
 
 describe('UserModule (e2e)', () => {
   let app: INestApplication
