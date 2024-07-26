@@ -6,8 +6,6 @@ import * as path from 'node:path'
 export const typeOrmConfig = (
   configService: ConfigService
 ): TypeOrmModuleOptions => {
-  // eslint-disable-next-line no-console
-  console.log('rootPath', rootPath)
   return {
     type: 'sqljs',
     autoSave: true,

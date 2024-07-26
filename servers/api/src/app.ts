@@ -8,12 +8,12 @@ import { AppModule } from './resource/app/app.module'
 import { setupStaticFiles } from './config/static-files.config'
 import { CustomLoggerService } from './config/logger.service'
 import { setupSwagger } from './config/swagger.config'
-import { envPath, rootPath, uploadPath } from './path'
+import { envPath, normalizePath, rootPath, uploadPath } from './path'
 import { LoggingInterceptor } from './config/logging.interceptor'
 import { AllExceptionsFilter } from './config/all-exceptions.filter'
 
 export async function createApp(envFile: string = envPath) {
-  const envFilePath = resolve(rootPath, envFile)
+  const envFilePath = normalizePath(resolve(rootPath, envFile))
   config({ path: envFilePath })
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
