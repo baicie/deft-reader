@@ -108,13 +108,10 @@ export default tseslint.config(
     },
     extends: [
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       ...compat.config(jsxA11yPlugin.configs.recommended),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       ...compat.config(reactPlugin.configs.recommended),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       ...compat.config(reactHooksPlugin.configs.recommended),
     ],
     rules: {
