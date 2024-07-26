@@ -58,6 +58,11 @@ jobs:
         if: steps.changed-files.outputs.only_changed != 'true'
         uses: pnpm/action-setup@v4.0.0
 
+      - name: Install Playwright
+        if: steps.changed-files.outputs.only_changed != 'true'
+        run: |
+          pnpm exec playwright install
+
       - name: Set node version to ${{ matrix.node_version }}
         if: steps.changed-files.outputs.only_changed != 'true'
         uses: actions/setup-node@v4
