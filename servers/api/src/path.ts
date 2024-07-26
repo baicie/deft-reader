@@ -1,4 +1,5 @@
-import path, { resolve } from 'node:path'
+import { resolve } from 'node:path'
+import { normalize } from 'node:path/posix'
 
 export const rootPath = resolve(__dirname, '..')
 export const logPath = resolve(rootPath, 'logs')
@@ -17,5 +18,5 @@ export function slash(p: string): string {
 }
 
 export function normalizePath(id: string): string {
-  return path.posix.normalize(isWindows ? slash(id) : id)
+  return normalize(isWindows ? slash(id) : id)
 }
