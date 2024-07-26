@@ -7,7 +7,7 @@ export const typeOrmConfig = (
   configService: ConfigService
 ): TypeOrmModuleOptions => {
   // eslint-disable-next-line no-console
-  console.log('rootPath', rootPath)
+  console.log('rootPath', configService.get('DATABASE_PATH'))
   return {
     type: 'sqljs',
     autoSave: true,
