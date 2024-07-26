@@ -1,3 +1,5 @@
+import crypto from 'node:crypto'
+
 export async function calculateFileMD5(file: File) {
   const buffer = await file.arrayBuffer()
   const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
