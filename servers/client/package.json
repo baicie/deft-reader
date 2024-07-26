@@ -12,20 +12,20 @@
     "test-e2e": "vitest -c vitest.config.e2e.ts"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.3.7",
-    "antd": "^5.19.1",
+    "@ant-design/icons": "^5.4.0",
+    "antd": "^5.19.3",
     "axios": "^1.7.2",
-    "dayjs": "^1.11.11",
-    "i18next": "^23.11.5",
+    "dayjs": "^1.11.12",
+    "i18next": "^23.12.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "js-cookie": "^3.0.5",
-    "mobx": "^6.13.0",
+    "mobx": "^6.13.1",
     "mobx-react": "^9.1.1",
     "mobx-react-lite": "^4.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^14.1.2",
-    "react-router-dom": "^6.24.1",
+    "react-i18next": "^15.0.0",
+    "react-router-dom": "^6.25.1",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.8.0"
   },
@@ -34,7 +34,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
-    "typescript": "^5.5.3",
-    "vite": "^5.3.3"
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5"
   }
 }

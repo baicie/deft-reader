@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { LogsController } from '../logs.controller'
 import { LogsService } from '../logs.service'
+import { expect } from 'vitest'
 
 describe('LogsController', () => {
   let controller: LogsController

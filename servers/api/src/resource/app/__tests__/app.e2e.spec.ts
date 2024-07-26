@@ -1,5 +1,6 @@
 import { Result } from '@/common/result'
 import request from 'supertest'
+import { expect } from 'vitest'
 import { app } from '~utils'
 
 describe('UsersController (e2e)', () => {
